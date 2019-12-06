@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Card Recognition</string>
+    <string name="description_info">Info</string>
+    <string name="request_permission">This sample needs camera permission.</string>
+    <string name="camera_error">This device doesn\'t support Camera2 API.</string>
+
+    <string name="wrong_prompt">Wrong Classified Cards</string>
+
+    <string-array name="wrong_classified">
+        <item>    0</item>
+        <item>    1</item>
+        <item>    2</item>
+        <item>    3</item>
+        <item>    4</item>
+        <item>    5</item>
+    </string-array>
+</resources>
