@@ -41,7 +41,9 @@ public class ManualEntryActivity extends AppCompatActivity
     EditText pocketCard2Txt = null;
     TextView probabilityToWin= null;
     TextView handValResult= null;
-    Button enterNextCardsButton= null;
+
+    Button scanH;
+
 
     Spinner noOfOpponentsSpinner= null;
 
@@ -72,7 +74,7 @@ public class ManualEntryActivity extends AppCompatActivity
         pocketCard2Txt = (EditText) findViewById(R.id.pocketCard2Txt);
         probabilityToWin = (TextView) findViewById(R.id.probabilityToWin);
         handValResult = (TextView) findViewById(R.id.handValResult);
-        enterNextCardsButton= (Button) findViewById(R.id.drawNextCardsButton);
+        scanH = findViewById(R.id.scanHand);
 
         noOfOpponentsSpinner= (Spinner) findViewById(R.id.noOfOpponentsSpinner);
         ArrayList<String> categories = new ArrayList<String>();
@@ -107,15 +109,17 @@ public class ManualEntryActivity extends AppCompatActivity
     }
 
     private void drawRound0() {
+
         deck= new Deck();
         ArrayList<Card> ppCards= deck.draw(2);
+        /*
         pocketCard1Txt.setText(ppCards.get(0).getCardAsShortString());
         pocketCard2Txt.setText(ppCards.get(1).getCardAsShortString());
         pocketCard1Img.setImageDrawable(getResId(ppCards.get(0).getCardAsShortString()));
         pocketCard2Img.setImageDrawable(getResId(ppCards.get(1).getCardAsShortString()));
+
+         */
         enableTxtRound0();
-        enterNextCardsButton.setText("draw/edit next card(s)");
-        enterNextCardsButton.setEnabled(true);
         composePlayerPocket();
         reCalc();
         handValResult.setText("–");
@@ -145,67 +149,35 @@ public class ManualEntryActivity extends AppCompatActivity
         txt.setFocusable(false); txt.setTextColor(Color.GRAY);
         txt.setEnabled(false);
     }
-    private void drawRound1() {
-        talon.addCards(deck.draw(3));
-        talonCard1Txt.setText(talon.cardAt(0).getCardAsShortString());
-        talonCard2Txt.setText(talon.cardAt(1).getCardAsShortString());
-        talonCard3Txt.setText(talon.cardAt(2).getCardAsShortString());
-        talonCard1Img.setImageDrawable(getResId(talon.cardAt(0).getCardAsShortString()));
-        talonCard2Img.setImageDrawable(getResId(talon.cardAt(1).getCardAsShortString()));
-        talonCard3Img.setImageDrawable(getResId(talon.cardAt(2).getCardAsShortString()));
-        enableTxtRound1();
-    }
+
     private void enableTxtRound1() {
-        disableEditText(pocketCard1Txt);
-        disableEditText(pocketCard2Txt);
         talonCard1Txt.setVisibility(View.VISIBLE);
         talonCard1Txt.selectAll();
         talonCard2Txt.setVisibility(View.VISIBLE);
         talonCard3Txt.setVisibility(View.VISIBLE);
 
     }
-    private void drawRound2() {
-        talon.addCards(deck.draw(1));
-        talonCard1Txt.setText(talon.cardAt(3).getCardAsShortString());
-        talonCard4Img.setImageDrawable(getResId(talon.cardAt(3).getCardAsShortString()));
-        enableTxtRound2();
-        composeCardSets();
-    }
-    private void enableTxtRound2() {
-        disableEditText(talonCard1Txt);
-        disableEditText(talonCard2Txt);
-        disableEditText(talonCard3Txt);
-        talonCard4Txt.setVisibility(View.VISIBLE);
-        talonCard4Txt.selectAll();
-    }
-    private void drawRound3() {
-        talon.addCards(deck.draw(1));
-        talonCard5Txt.setText(talon.cardAt(4).getCardAsShortString());
-        talonCard4Img.setImageDrawable(getResId(talon.cardAt(4).getCardAsShortString()));
-        enableTxtRound3();
-        composeCardSets();
 
-    }
-    private void enableTxtRound3() {
-        disableEditText(talonCard4Txt);
+    private void enableTxtRound2() {
         talonCard4Txt.setVisibility(View.VISIBLE);
         talonCard4Txt.selectAll();
     }
-    public void onClickEnterNextCards(View v) {
-        nextRound= nextRound + 1;
-        switch (nextRound) {
-            case 1: drawRound1();
-                break;
-            case 2: drawRound2();
-                break;
-            case 3: drawRound3();
-                enterNextCardsButton.setEnabled(false);
-                break;
-        }
+
+    private void enableTxtRound3() {
+        talonCard4Txt.setVisibility(View.VISIBLE);
+        talonCard4Txt.selectAll();
     }
+
     public void onClickStartAgain(View v) {
         nextRound= 0;
         drawRound0();
+    }
+
+    public void onClickScanHand(View v) {
+
+        //TODO - OPEN Tensorflow and scan Cards and add Values to pocketCards
+
+        enableTxtRound1();
     }
     private void reCalc() {
         Player me= new Player(talon, playerPocket);
@@ -278,12 +250,10 @@ public class ManualEntryActivity extends AppCompatActivity
         Card otherCard= new Card(txt.getText().toString());
         if (!otherCard.isCorrect() || isDuplicateCard(otherCard, newCardDesc)) {
             txt.setTextColor(Color.RED);
-            enterNextCardsButton.setEnabled(false);
             return;
         }
         txt.setTextColor(Color.BLACK);
-        if (nextRound != 3)
-            enterNextCardsButton.setEnabled(true);
+
         composeCardSets();
     }
     private boolean cardDescHasChanged(String cardDesc, CardSet cSet, int pos) {
