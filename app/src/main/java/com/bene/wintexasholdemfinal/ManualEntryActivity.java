@@ -182,7 +182,7 @@ public class ManualEntryActivity extends AppCompatActivity
     }
     private void drawRound2() {
         talon.addCards(deck.draw(1));
-        talonCard1Txt.setText(talon.cardAt(3).getCardAsShortString());
+        talonCard4Txt.setText(talon.cardAt(3).getCardAsShortString());
         talonCard4Img.setImageDrawable(getResId(talon.cardAt(3).getCardAsShortString()));
         enableTxtRound2();
         composeCardSets();
@@ -195,7 +195,7 @@ public class ManualEntryActivity extends AppCompatActivity
     private void drawRound3() {
         talon.addCards(deck.draw(1));
         talonCard5Txt.setText(talon.cardAt(4).getCardAsShortString());
-        talonCard4Img.setImageDrawable(getResId(talon.cardAt(4).getCardAsShortString()));
+        talonCard5Img.setImageDrawable(getResId(talon.cardAt(4).getCardAsShortString()));
         enableTxtRound3();
         composeCardSets();
 
@@ -209,22 +209,28 @@ public class ManualEntryActivity extends AppCompatActivity
     public void onClickStartAgain(View v) {
         nextRound= 0;
         drawRound0();
+        scanFlop.setVisibility(View.INVISIBLE);
+        scanTurn.setVisibility(View.INVISIBLE);
+        scanRiver.setVisibility(View.INVISIBLE);
     }
 
     public void onClickscanFlop(View v){
-        nextRound++;
-        enableTxtRound2();
-        drawRound2();
-        scanTurn.setVisibility(View.VISIBLE);
+        if(scanTurn.getVisibility() == View.INVISIBLE) {
+            nextRound = 2;
+            drawRound2();
+            scanTurn.setVisibility(View.VISIBLE);
+        }
 
         //TODO Scan first 3 Cards of Talon
 
     }
     public void onClickscanTurn(View v){
-        nextRound++;
-        enableTxtRound3();
-        drawRound3();
-        scanRiver.setVisibility(View.VISIBLE);
+        if(scanRiver.getVisibility() == View.INVISIBLE) {
+            nextRound = 3;
+            drawRound3();
+            scanRiver.setVisibility(View.VISIBLE);
+        }
+
 
         //TODO Scan 4. Cards of Talon
 
@@ -232,13 +238,13 @@ public class ManualEntryActivity extends AppCompatActivity
     }
     public void onClickscanRiver(View v){
         //TODO Scan 5. Card of Talon
-        enableTxtRound3();
     }
     public void onClickScanHand(View v) {
-        nextRound++;
-        enableTxtRound1();
-        drawRound1();
-        scanFlop.setVisibility(View.VISIBLE);
+        if(scanFlop.getVisibility() == View.INVISIBLE) {
+            nextRound = 1;
+            drawRound1();
+            scanFlop.setVisibility(View.VISIBLE);
+        }
 
         //TODO - OPEN Tensorflow and scan Cards and add Values to pocketCards
 
