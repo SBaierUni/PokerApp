@@ -19,6 +19,7 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import TH_0_99_1.*;
@@ -42,8 +43,12 @@ public class ManualEntryActivity extends AppCompatActivity
     TextView probabilityToWin= null;
     TextView handValResult= null;
 
-    Button scanH;
+    Button scanHand;
+    Button scanFlop;
+    Button scanTurn;
+    Button scanRiver;
 
+    Thread probCalculatorThread;
 
     Spinner noOfOpponentsSpinner= null;
 
@@ -74,7 +79,16 @@ public class ManualEntryActivity extends AppCompatActivity
         pocketCard2Txt = (EditText) findViewById(R.id.pocketCard2Txt);
         probabilityToWin = (TextView) findViewById(R.id.probabilityToWin);
         handValResult = (TextView) findViewById(R.id.handValResult);
-        scanH = findViewById(R.id.scanHand);
+        scanFlop = findViewById(R.id.scanFlop);
+        scanHand = findViewById(R.id.scanHand);
+        scanTurn = findViewById(R.id.scanTurn);
+        scanRiver = findViewById(R.id.scanRiver);
+
+        scanFlop.setVisibility(View.INVISIBLE);
+        scanTurn.setVisibility(View.INVISIBLE);
+        scanRiver.setVisibility(View.INVISIBLE);
+
+
 
         noOfOpponentsSpinner= (Spinner) findViewById(R.id.noOfOpponentsSpinner);
         ArrayList<String> categories = new ArrayList<String>();
@@ -112,15 +126,14 @@ public class ManualEntryActivity extends AppCompatActivity
 
         deck= new Deck();
         ArrayList<Card> ppCards= deck.draw(2);
-        /*
+
         pocketCard1Txt.setText(ppCards.get(0).getCardAsShortString());
         pocketCard2Txt.setText(ppCards.get(1).getCardAsShortString());
         pocketCard1Img.setImageDrawable(getResId(ppCards.get(0).getCardAsShortString()));
         pocketCard2Img.setImageDrawable(getResId(ppCards.get(1).getCardAsShortString()));
 
-         */
+
         enableTxtRound0();
-        composePlayerPocket();
         reCalc();
         handValResult.setText("–");
     }
@@ -149,6 +162,16 @@ public class ManualEntryActivity extends AppCompatActivity
         txt.setFocusable(false); txt.setTextColor(Color.GRAY);
         txt.setEnabled(false);
     }
+    private void drawRound1() {
+        talon.addCards(deck.draw(3));
+        talonCard1Txt.setText(talon.cardAt(0).getCardAsShortString());
+        talonCard2Txt.setText(talon.cardAt(1).getCardAsShortString());
+        talonCard3Txt.setText(talon.cardAt(2).getCardAsShortString());
+        talonCard1Img.setImageDrawable(getResId(talon.cardAt(0).getCardAsShortString()));
+        talonCard2Img.setImageDrawable(getResId(talon.cardAt(1).getCardAsShortString()));
+        talonCard3Img.setImageDrawable(getResId(talon.cardAt(2).getCardAsShortString()));
+        enableTxtRound1();
+    }
 
     private void enableTxtRound1() {
         talonCard1Txt.setVisibility(View.VISIBLE);
@@ -157,15 +180,30 @@ public class ManualEntryActivity extends AppCompatActivity
         talonCard3Txt.setVisibility(View.VISIBLE);
 
     }
+    private void drawRound2() {
+        talon.addCards(deck.draw(1));
+        talonCard1Txt.setText(talon.cardAt(3).getCardAsShortString());
+        talonCard4Img.setImageDrawable(getResId(talon.cardAt(3).getCardAsShortString()));
+        enableTxtRound2();
+        composeCardSets();
+    }
 
     private void enableTxtRound2() {
         talonCard4Txt.setVisibility(View.VISIBLE);
         talonCard4Txt.selectAll();
     }
+    private void drawRound3() {
+        talon.addCards(deck.draw(1));
+        talonCard5Txt.setText(talon.cardAt(4).getCardAsShortString());
+        talonCard4Img.setImageDrawable(getResId(talon.cardAt(4).getCardAsShortString()));
+        enableTxtRound3();
+        composeCardSets();
+
+    }
 
     private void enableTxtRound3() {
-        talonCard4Txt.setVisibility(View.VISIBLE);
-        talonCard4Txt.selectAll();
+        talonCard5Txt.setVisibility(View.VISIBLE);
+        talonCard5Txt.selectAll();
     }
 
     public void onClickStartAgain(View v) {
@@ -173,12 +211,39 @@ public class ManualEntryActivity extends AppCompatActivity
         drawRound0();
     }
 
+    public void onClickscanFlop(View v){
+        nextRound++;
+        enableTxtRound2();
+        drawRound2();
+        scanTurn.setVisibility(View.VISIBLE);
+
+        //TODO Scan first 3 Cards of Talon
+
+    }
+    public void onClickscanTurn(View v){
+        nextRound++;
+        enableTxtRound3();
+        drawRound3();
+        scanRiver.setVisibility(View.VISIBLE);
+
+        //TODO Scan 4. Cards of Talon
+
+
+    }
+    public void onClickscanRiver(View v){
+        //TODO Scan 5. Card of Talon
+        enableTxtRound3();
+    }
     public void onClickScanHand(View v) {
+        nextRound++;
+        enableTxtRound1();
+        drawRound1();
+        scanFlop.setVisibility(View.VISIBLE);
 
         //TODO - OPEN Tensorflow and scan Cards and add Values to pocketCards
 
-        enableTxtRound1();
     }
+
     private void reCalc() {
         Player me= new Player(talon, playerPocket);
         deck.reset();
@@ -188,7 +253,7 @@ public class ManualEntryActivity extends AppCompatActivity
         if (nextRound != 0) {
             handValResult.setText(hVal.toString());
         }
-        calcAndSetProbability(noOfOpponents);
+        calcAndSetProbability();
     }
     private void composePlayerPocket() {
         playerPocket = new PlayerPocket();
@@ -434,11 +499,30 @@ public class ManualEntryActivity extends AppCompatActivity
             }
         });
     }
-    private void calcAndSetProbability(int noOfOpp) {
-        ProbabilityOfWinningCalculator calc= new ProbabilityOfWinningCalculator(talon, playerPocket, deck, noOfOpp);
-        double prob= calc.calcProbability(888);
-        String probStr= String.format("%.2f", prob);
-        probabilityToWin.setText(probStr + "%");
+    private void calcAndSetProbability(){
+        if(probCalculatorThread != null){
+            probCalculatorThread.interrupt();
+        }
+        probCalculatorThread = new Thread(new Runnable() {
+            public void run(){
+                final ProbabilityOfWinningCalculator prob = new ProbabilityOfWinningCalculator(talon, playerPocket, deck, noOfOpponents);
+                final DecimalFormat df = new DecimalFormat("#.0");
+                double probs = 0;
+                for(int i = 0; i < 100; i++){
+                    if(Thread.currentThread().isInterrupted()){
+                        break;
+                    }
+                    probs += prob.calcProbability(200);
+                    final double transmitProb = probs / (i+1);
+                    probabilityToWin.post(new Runnable(){
+                        public void run(){
+                            probabilityToWin.setText(df.format(transmitProb) +  "%");
+                        }
+                    });
+                }
+            }
+        });
+        probCalculatorThread.start();
     }
     private Drawable getResId(String cardShort) {  // shorter version to map the card string to the .GIF file representing a card icon
         cardShort= cardShort.toLowerCase();   // .GIF files need to be in lower case letters => we have to convert; eg "CA" -> "ca"

@@ -8,13 +8,27 @@
     tools:context=".ManualEntryActivity">
 
 
-    <TextView
-        android:id="@+id/text4"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Pocket Cards:"
-        android:textSize="36sp"
-        android:textStyle="bold" />
+        android:layout_height="54dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/text4"
+            android:layout_width="245dp"
+            android:layout_height="wrap_content"
+            android:text="Pocket Cards:"
+            android:textSize="36sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/scanHand"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="onClickScanHand"
+            android:text="Scan Hand" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -136,7 +150,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="35dp">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/talonCard1Img"
@@ -172,6 +186,38 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:srcCompat="@drawable/ck" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/scanFlop"
+            android:layout_width="247dp"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            android:onClick="onClickscanFlop"
+            android:text="Scan-Flop" />
+
+        <Button
+            android:id="@+id/scanTurn"
+            android:layout_width="82dp"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            android:onClick="onClickscanTurn"
+            android:text="Scan-Turn" />
+
+        <Button
+            android:id="@+id/scanRiver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onClickscanRiver"
+            android:textSize="10dp"
+            android:text="Scan-River" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -257,19 +303,18 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/scanHand"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="onClickScanHand"
-            android:text="ScanHand" />
     </LinearLayout>
 
     <Button
         android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button" />
+
+    <Button
+        android:id="@+id/button4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Button" />
