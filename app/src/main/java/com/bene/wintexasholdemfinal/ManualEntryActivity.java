@@ -6,6 +6,8 @@ import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatDelegate;
+import android.support.v7.widget.SwitchCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -43,10 +45,12 @@ public class ManualEntryActivity extends AppCompatActivity
     TextView probabilityToWin= null;
     TextView handValResult= null;
 
+
     Button scanHand;
     Button scanFlop;
     Button scanTurn;
     Button scanRiver;
+    Button hideCards;
 
     Thread probCalculatorThread;
 
@@ -83,10 +87,13 @@ public class ManualEntryActivity extends AppCompatActivity
         scanHand = findViewById(R.id.scanHand);
         scanTurn = findViewById(R.id.scanTurn);
         scanRiver = findViewById(R.id.scanRiver);
+        hideCards = findViewById(R.id.hideCards);
 
         scanFlop.setVisibility(View.INVISIBLE);
         scanTurn.setVisibility(View.INVISIBLE);
         scanRiver.setVisibility(View.INVISIBLE);
+
+
 
 
 
@@ -248,6 +255,23 @@ public class ManualEntryActivity extends AppCompatActivity
 
         //TODO - OPEN Tensorflow and scan Cards and add Values to pocketCards
 
+    }
+    public void onClickhideCards(View v){
+        if(pocketCard1Img.getVisibility() == View.VISIBLE){
+            pocketCard1Img.setVisibility(View.INVISIBLE);
+            pocketCard2Img.setVisibility(View.INVISIBLE);
+            pocketCard1Txt.setVisibility(View.INVISIBLE);
+            pocketCard2Txt.setVisibility(View.INVISIBLE);
+            probabilityToWin.setVisibility(View.INVISIBLE);
+        }
+        else {
+            pocketCard1Img.setVisibility(View.VISIBLE);
+            pocketCard2Img.setVisibility(View.VISIBLE);
+            pocketCard1Txt.setVisibility(View.VISIBLE);
+            pocketCard2Txt.setVisibility(View.VISIBLE);
+            probabilityToWin.setVisibility(View.VISIBLE);
+
+        }
     }
 
     private void reCalc() {

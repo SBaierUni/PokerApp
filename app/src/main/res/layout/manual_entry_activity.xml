@@ -26,6 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:backgroundTint="#FFBF00"
             android:onClick="onClickScanHand"
             android:text="Scan Hand" />
     </LinearLayout>
@@ -197,26 +198,29 @@
             android:id="@+id/scanFlop"
             android:layout_width="247dp"
             android:layout_height="wrap_content"
-            android:textSize="10dp"
+            android:backgroundTint="#FFBF00"
             android:onClick="onClickscanFlop"
-            android:text="Scan-Flop" />
+            android:text="Scan-Flop"
+            android:textSize="10dp" />
 
         <Button
             android:id="@+id/scanTurn"
             android:layout_width="82dp"
             android:layout_height="wrap_content"
-            android:textSize="10dp"
+            android:backgroundTint="#FFBF00"
             android:onClick="onClickscanTurn"
-            android:text="Scan-Turn" />
+            android:text="Scan-Turn"
+            android:textSize="10dp" />
 
         <Button
             android:id="@+id/scanRiver"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="#FFBF00"
             android:onClick="onClickscanRiver"
-            android:textSize="10dp"
-            android:text="Scan-River" />
+            android:text="Scan-River"
+            android:textSize="10dp" />
 
     </LinearLayout>
 
@@ -291,6 +295,7 @@
         android:id="@+id/startAgainButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="#52DF16"
         android:onClick="onClickStartAgain"
         android:text="START AGAIN"
         android:textSize="30sp" />
@@ -304,6 +309,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/hideCards"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="#F70A0A"
+            android:onClick="onClickhideCards"
+            android:text="HideCards" />
 
     </LinearLayout>
 
