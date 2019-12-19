@@ -1,5 +1,6 @@
 package org.tensorflow.lite.examples.detection;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
@@ -7,6 +8,7 @@ import android.graphics.Matrix;
 import android.util.Size;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -58,24 +60,27 @@ public class DetectorActivity extends CameraActivity {
 
     @Override
     protected void processImage() {
-        rgbFrameBitmap.setPixels(getRgbBytes(), 0, previewWidth, 0, 0, previewWidth, previewHeight);
+        if (switchBack) {
+            rgbFrameBitmap.setPixels(getRgbBytes(), 0, previewWidth, 0, 0, previewWidth, previewHeight);
 
-        final Canvas canvas = new Canvas(croppedBitmap);
-        canvas.drawBitmap(rgbFrameBitmap, frameToCropTransform, null);
+            final Canvas canvas = new Canvas(croppedBitmap);
+            canvas.drawBitmap(rgbFrameBitmap, frameToCropTransform, null);
 
-        runInBackground(() -> {
-            runOnUiThread(() -> setPredictionView("Performing recognition..."));
+            runInBackground(() -> {
+                runOnUiThread(() -> setPredictionView("Performing recognition..."));
 
-            final List<Classifier.Recognition> results = detector.recognizeImage(croppedBitmap);
-            final List<String> det_cards = new LinkedList<>();
-            for (final Classifier.Recognition result : results) {
-                if (result.getConfidence() >= MINIMUM_CONFIDENCE && !det_cards.contains(result.getTitle()))
-                    det_cards.add(result.getTitle());
-            }
+                final List<Classifier.Recognition> results = detector.recognizeImage(croppedBitmap);
+                final ArrayList<String> det_cards = new ArrayList<>();
+                for (final Classifier.Recognition result : results) {
+                    if (result.getConfidence() >= MINIMUM_CONFIDENCE && !det_cards.contains(result.getTitle()))
+                        det_cards.add(result.getTitle());
+                }
 
-            // printing prediction on view
-            runOnUiThread(() -> setPredictionView("Recognized: " + det_cards.toString()));
-        });
+                // printing prediction on view
+                runOnUiThread(() -> setPredictionView("Recognized: " + det_cards.toString()));
+                switchBackToCallerActivity(det_cards);
+            });
+        }
     }
 
     @Override
@@ -86,5 +91,16 @@ public class DetectorActivity extends CameraActivity {
     @Override
     protected Size getDesiredPreviewFrameSize() {
         return DESIRED_PREVIEW_SIZE;
+    }
+
+    private void switchBackToCallerActivity(ArrayList<String> prediction) {
+        Intent i = new Intent();
+        // Sending param key as 'website' and value as 'androidhive.info'
+        i.putStringArrayListExtra("prediction", prediction);
+
+        // Setting resultCode to 100 to identify on old activity
+        setResult(100, i);
+
+        finish();   // terminate activity and switch back to manual_entry_layout
     }
 }

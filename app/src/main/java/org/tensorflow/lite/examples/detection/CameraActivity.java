@@ -18,6 +18,7 @@ package org.tensorflow.lite.examples.detection;
 
 import android.Manifest;
 import android.app.Fragment;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.os.Build;
@@ -38,6 +39,8 @@ import android.widget.Toast;
 
 import org.tensorflow.lite.examples.detection.env.ImageUtils;
 
+import java.util.List;
+
 public abstract class CameraActivity extends AppCompatActivity
         implements Camera.PreviewCallback,
         View.OnClickListener {
@@ -53,6 +56,7 @@ public abstract class CameraActivity extends AppCompatActivity
     private Runnable postInferenceCallback;
     private Runnable imageConverter;
     private TextView pred_view;
+    protected boolean switchBack = false;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -177,6 +181,7 @@ public abstract class CameraActivity extends AppCompatActivity
         if (v.getId() == R.id.captBtn) {
             // TODO switch back to stats_view instead
             readyForNextImage();
+            switchBack = true;
         }
     }
 
