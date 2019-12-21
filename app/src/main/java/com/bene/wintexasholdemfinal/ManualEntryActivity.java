@@ -10,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -31,35 +30,28 @@ import java.util.Objects;
 
 public class ManualEntryActivity extends AppCompatActivity
         implements AdapterView.OnItemSelectedListener {
-    TextView probabilityToWin= null;
-    TextView handValResult= null;
+    private TextView probabilityToWin= null;
+    private TextView handValResult= null;
 
-    Button scanHand;
-    Button scanFlop;
-    Button scanTurn;
-    Button scanRiver;
-    Button hideCards;
+    private Button scanHand;
+    private Button scanFlop;
+    private Button scanTurn;
+    private Button scanRiver;
+    private Button hideCards;
 
-    Thread probCalculatorThread;
+    private Thread probCalculatorThread;
 
-    Spinner noOfOpponentsSpinner= null;
+    private Spinner noOfOpponentsSpinner= null;
 
-    Spinner[] symHand = new Spinner[2];
-    Spinner[] valHand = new Spinner[2];
-    String[] hand_sym_id;
-    String[] hand_val_id;
+    private CardSpinner[] hand_cards = new CardSpinner[2];
+    private CardSpinner[] talon_cards = new CardSpinner[5];
 
-    Spinner[] symTalon = new Spinner[5];
-    Spinner[] valTalon = new Spinner[5];
-
-    Deck deck= new Deck();
-    Talon talon= new Talon();
-    PlayerPocket playerPocket= new PlayerPocket();
-    int nextRound= 0;
-    int noOfOpponents= 3;
-    ArrayList<String> currPrediction;
-    ArrayList<String> card_values;
-    final char[] symbols = {'C', 'D', 'S', 'H'};
+    private Deck deck = new Deck();
+    private Talon talon = new Talon();
+    private PlayerPocket playerPocket= new PlayerPocket();
+    private int nextRound = 0;
+    private int noOfOpponents = 3;
+    private ArrayList<String> currPrediction;
 
     final int ACTIVITY_REQUEST_CODE = 100;
 
@@ -83,109 +75,65 @@ public class ManualEntryActivity extends AppCompatActivity
         scanRiver.setVisibility(View.INVISIBLE);
         hideCards = findViewById(R.id.hideCards);
 
-        // TODO remove shit
-        noOfOpponentsSpinner= (Spinner) findViewById(R.id.noOfOpponentsSpinner);
-        ArrayList<String> categories = new ArrayList<String>();
-        categories.add("1");
-        categories.add("2");
-        categories.add("3");
-        categories.add("4");
-        categories.add("5");
-        categories.add("6");
-        categories.add("7");
-        categories.add("8");
+        String[] categories = getResources().getStringArray(R.array.categories);
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        noOfOpponentsSpinner= (Spinner) findViewById(R.id.noOfOpponentsSpinner);
         noOfOpponentsSpinner.setAdapter(dataAdapter);
         noOfOpponentsSpinner.setSelection(noOfOpponents - 1);  // default value: 3 (= index position 2) opponents
         noOfOpponentsSpinner.setOnItemSelectedListener(this);
 
-        // TODO replace T by 10
-        card_values = new ArrayList<String>();
-        card_values.add("2");
-        card_values.add("3");
-        card_values.add("4");
-        card_values.add("5");
-        card_values.add("6");
-        card_values.add("7");
-        card_values.add("8");
-        card_values.add("9");
-        card_values.add("T");
-        card_values.add("J");
-        card_values.add("Q");
-        card_values.add("K");
-        card_values.add("A");
-
-        ImageAdapter imgAdapter = new ImageAdapter(getApplicationContext());
-        ArrayAdapter<String> valAdapter = new ArrayAdapter<String>(this, R.layout.spinner_custom_numbers_layout, card_values);
-
-        hand_sym_id = getResources().getStringArray(R.array.hand_symbol_ids);
-        hand_val_id = getResources().getStringArray(R.array.hand_value_ids);
-
+        String[] hand_sym_id = getResources().getStringArray(R.array.hand_symbol_ids);
+        String[] hand_val_id = getResources().getStringArray(R.array.hand_value_ids);
         String[] talon_sym_id = getResources().getStringArray(R.array.talon_symbol_ids);
         String[] talon_val_id = getResources().getStringArray(R.array.talon_value_ids);
 
-        for(int i = 0; i < hand_sym_id.length; i++) {
-            symHand[i] = (Spinner) findViewById(getResources().getIdentifier(hand_sym_id[i], "id", getPackageName()));
-            valHand[i] = (Spinner) findViewById(getResources().getIdentifier(hand_val_id[i], "id", getPackageName()));
-            symHand[i].setAdapter(imgAdapter);
-            valHand[i].setAdapter(valAdapter);
-            symHand[i].setOnItemSelectedListener(this);
-            valHand[i].setOnItemSelectedListener(this);
+        for(int i = 0; i < hand_cards.length; i++) {
+            hand_cards[i] = new CardSpinner((Spinner) findViewById(getResources().getIdentifier(hand_val_id[i], "id", getPackageName())),
+                    (Spinner) findViewById(getResources().getIdentifier(hand_sym_id[i], "id", getPackageName())));
+            hand_cards[i].setAdapter(this);
+            hand_cards[i].setOnItemSelectedListener(this);
         }
 
-        CardSpinner cs = new CardSpinner((Spinner)findViewById(R.id.spinner_numbers_hand_1), (Spinner)findViewById(R.id.spinner_symbols_hand_1));
-
-        for(int i = 0; i < talon_sym_id.length; i++) {
-            symTalon[i] = (Spinner) findViewById(getResources().getIdentifier(talon_sym_id[i], "id", getPackageName()));
-            valTalon[i] = (Spinner) findViewById(getResources().getIdentifier(talon_val_id[i], "id", getPackageName()));
-            symTalon[i].setAdapter(imgAdapter);
-            valTalon[i].setAdapter(valAdapter);
-            symTalon[i].setOnItemSelectedListener(this);
-            valTalon[i].setOnItemSelectedListener(this);
+        for(int i = 0; i < talon_cards.length; i++) {
+            talon_cards[i] = new CardSpinner((Spinner) findViewById(getResources().getIdentifier(talon_val_id[i], "id", getPackageName())),
+                    (Spinner) findViewById(getResources().getIdentifier(talon_sym_id[i], "id", getPackageName())));
+            talon_cards[i].setAdapter(this);
+            talon_cards[i].setOnItemSelectedListener(this);
         }
 
-        //randomize();
+        randomize();
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         int parent_id = parent.getId();
-        // 'position' contains selected spinner item (counts from 0);
-        // recalculate probability of winning based on 'position'
+
         if (parent_id == noOfOpponentsSpinner.getId()) {
             noOfOpponents = position + 1;
             reCalc();
         }
 
-        for(int i = 0; i < symHand.length; i++) {
-            if(parent_id == symHand[i].getId() || parent_id == valHand[i].getId()) {
-                checkAndChangeCard(valHand[i], symHand[i], cardDescHasChanged(getSpinnerText(valHand[i], symHand[i]), playerPocket, i));
-            }
-        }
+        for(int i = 0; i < hand_cards.length; i++)
+            if(hand_cards[i].compareID(parent_id))
+                checkAndChangeCard(hand_cards[i], cardDescHasChanged(hand_cards[i].getText(), playerPocket, i));
 
-        for(int i = 0; i < symTalon.length; i++) {
-            if(parent_id == symTalon[i].getId() || parent_id == valTalon[i].getId()) {
-                checkAndChangeCard(valTalon[i], symTalon[i], cardDescHasChanged(getSpinnerText(valTalon[i], symTalon[i]), talon, i));
-            }
-        }
+
+        for(int i = 0; i < talon_cards.length; i++)
+            if(talon_cards[i].compareID(parent_id))
+                checkAndChangeCard(talon_cards[i], cardDescHasChanged(talon_cards[i].getText(), talon, i));
     }
 
-    // TODO check isDuplicate correctness
-    private void checkAndChangeCard (Spinner val, Spinner sym, boolean newCardDesc) { // newCardDesc = true  => cardDesc has changed
-        Card otherCard = new Card(getSpinnerText(val, sym));
+    // TODO check isDuplicateCard correctness
+    private void checkAndChangeCard (CardSpinner cs, boolean newCardDesc) { // newCardDesc = true  => cardDesc has changed
+        Card otherCard = new Card(cs.getText());
         if (!otherCard.isCorrect() || isDuplicateCard(otherCard, newCardDesc)) {
-            // TODO do some error indication
+            // TODO maybe do some error indication
             //txt.setTextColor(Color.RED);
             return;
         }
 
-        // update text color depending on symbol
-        if (sym.getSelectedItemPosition() % 2 == 0)
-            ((TextView) val.getChildAt(0)).setTextColor(Color.BLACK);
-        else
-            ((TextView) val.getChildAt(0)).setTextColor(Color.parseColor("#cb2529"));
-
+        cs.updateTextColor();
         composeCardSets();
     }
 
@@ -205,7 +153,8 @@ public class ManualEntryActivity extends AppCompatActivity
         return null;
     }
 
-    private void drawCard(Spinner val, Spinner sym, boolean addToTalon) {
+    // TODO value colour not updated after hand recognition
+    private void drawCard(CardSpinner cs, boolean addToTalon) {
         String card = getPredictedCard();
 
         // if card not recognized in image -> pick random card
@@ -214,36 +163,30 @@ public class ManualEntryActivity extends AppCompatActivity
         else
             deck.addToAlreadyDrawnCards(new Card(card));
 
+        if(addToTalon) talon.addCard(new Card(card));
 
-        if(addToTalon)
-            talon.addCard(new Card(card));
-
-        for(int i = 0; i < symbols.length; i++)
-            if(symbols[i] == card.charAt(0))
-                sym.setSelection(i);
-
-        for(int i = 0; i < card_values.size(); i++)
-            if (card_values.get(i).charAt(0) == card.charAt(1))
-                val.setSelection(i);
+        cs.setSelection(card);
     }
 
     private void drawRound0() {
-        //resetGame();
-        //deck = new Deck();
+        resetGame();
 
-        drawCard(valHand[0], symHand[0], false);
-        drawCard(valHand[1], symHand[1], false);
+
+        drawCard(hand_cards[0], false);
+        drawCard(hand_cards[1], false);
 
         enableTxtRound0();
-        //reCalc();
-        handValResult.setText("–");
     }
 
     private void enableTxtRound0() {
-        for(int i = 0; i < symTalon.length; i++) {
-            valTalon[i].setVisibility(View.INVISIBLE);
-            symTalon[i].setVisibility(View.INVISIBLE);
-        }
+        hand_cards[0].setVisibility(View.VISIBLE);
+        hand_cards[1].setVisibility(View.VISIBLE);
+
+        if(scanFlop.getVisibility() == View.INVISIBLE)
+            scanFlop.setVisibility(View.VISIBLE);
+
+        for (CardSpinner talon_card : talon_cards)
+            talon_card.setVisibility(View.INVISIBLE);
     }
     private void enableEditText(EditText txt) {
         txt.setFocusable(true); txt.setFocusableInTouchMode(true);
@@ -255,71 +198,64 @@ public class ManualEntryActivity extends AppCompatActivity
         txt.setEnabled(false);
     }
     private void drawRound1() {
-        drawCard(valTalon[0], symTalon[0], true);
-        drawCard(valTalon[1], symTalon[1], true);
-        drawCard(valTalon[2], symTalon[2], true);
+        drawCard(talon_cards[0], true);
+        drawCard(talon_cards[1], true);
+        drawCard(talon_cards[2], true);
 
         enableTxtRound1();
     }
 
     private void enableTxtRound1() {
-        for(int i = 0; i < 3; i++) {
-            symTalon[i].setVisibility(View.VISIBLE);
-            valTalon[i].setVisibility(View.VISIBLE);
-        }
+        for(int i = 0; i < 3; i++)
+            talon_cards[i].setVisibility(View.VISIBLE);
     }
     private void drawRound2() {
-        drawCard(valTalon[3], symTalon[3], true);
+        drawCard(talon_cards[3], true);
         enableTxtRound2();
         composeCardSets();
     }
 
     private void enableTxtRound2() {
-        symTalon[3].setVisibility(View.VISIBLE);
-        valTalon[3].setVisibility(View.VISIBLE);
+        talon_cards[3].setVisibility(View.VISIBLE);
     }
     private void drawRound3() {
-        drawCard(valTalon[4], symTalon[4], true);
-        symTalon[4].setVisibility(View.VISIBLE);
-        valTalon[4].setVisibility(View.VISIBLE);
+        drawCard(talon_cards[4], true);
+        talon_cards[4].setVisibility(View.VISIBLE);
         composeCardSets();
     }
 
     private void randomize(){
         deck = new Deck();
 
-        drawCard(symHand[0], valHand[0], false);
-        drawCard(symHand[1], valHand[1], false);
+        drawCard(hand_cards[0], false);
+        drawCard(hand_cards[1], false);
 
-        for(int i = 0; i < symTalon.length; i++)
-            drawCard(symTalon[i], valTalon[i], true);
-        resetGame();
+        for (CardSpinner talon_card : talon_cards) drawCard(talon_card, true);
     }
 
+    // TODO reset not fully working, prediction is behind, maybe do recalc
     private void resetGame() {
+        nextRound = 0;
         deck = new Deck();
 
         scanFlop.setVisibility(View.INVISIBLE);
         scanTurn.setVisibility(View.INVISIBLE);
         scanRiver.setVisibility(View.INVISIBLE);
 
-        valHand[0].setVisibility(View.INVISIBLE);
-        valHand[1].setVisibility(View.INVISIBLE);
-        symHand[0].setVisibility(View.INVISIBLE);
-        symHand[1].setVisibility(View.INVISIBLE);
+        hand_cards[0].setVisibility(View.INVISIBLE);
+        hand_cards[1].setVisibility(View.INVISIBLE);
 
-        for(int i = 0; i < symTalon.length; i++) {
-            valTalon[i].setVisibility(View.INVISIBLE);
-            symTalon[i].setVisibility(View.INVISIBLE);
-        }
+        for (CardSpinner talon_card : talon_cards)
+            talon_card.setVisibility(View.INVISIBLE);
 
+        talon = new Talon();
+        playerPocket = new PlayerPocket();
+        calcAndSetProbability();
         handValResult.setText("–");
     }
 
     public void onClickStartAgain(View v) {
-        nextRound = 0;
-        // TODO delete data, some strange shit happening
-        //randomize();
+        resetGame();
     }
 
     public void onClickscanFlop(View v){
@@ -339,25 +275,19 @@ public class ManualEntryActivity extends AppCompatActivity
     }
 
     public void onClickScanHand(View v) {
-        if(scanFlop.getVisibility() == View.INVISIBLE)
-            scanFlop.setVisibility(View.VISIBLE);
         openCameraView();
     }
 
     public void onClickhideCards(View v){
         if(probabilityToWin.getVisibility() == View.VISIBLE){
             probabilityToWin.setVisibility(View.INVISIBLE);
-            valHand[0].setVisibility(View.INVISIBLE);
-            symHand[0].setVisibility(View.INVISIBLE);
-            valHand[1].setVisibility(View.INVISIBLE);
-            symHand[1].setVisibility(View.INVISIBLE);
+            hand_cards[0].setVisibility(View.INVISIBLE);
+            hand_cards[1].setVisibility(View.INVISIBLE);
         }
         else {
             probabilityToWin.setVisibility(View.VISIBLE);
-            valHand[0].setVisibility(View.VISIBLE);
-            symHand[0].setVisibility(View.VISIBLE);
-            valHand[1].setVisibility(View.VISIBLE);
-            symHand[1].setVisibility(View.VISIBLE);
+            hand_cards[0].setVisibility(View.VISIBLE);
+            hand_cards[1].setVisibility(View.VISIBLE);
         }
     }
 
@@ -398,31 +328,27 @@ public class ManualEntryActivity extends AppCompatActivity
         calcAndSetProbability();
     }
 
-    private String getSpinnerText(Spinner val, Spinner sym) {
-        return symbols[sym.getSelectedItemPosition()] + "" + val.getSelectedItem().toString();
-    }
-
     private void composePlayerPocket() {
         playerPocket = new PlayerPocket();
-        playerPocket.addCard(new Card(getSpinnerText(valHand[0], symHand[0])));
-        playerPocket.addCard(new Card(getSpinnerText(valHand[1], symHand[1])));
+        playerPocket.addCard(new Card(hand_cards[0].getText()));
+        playerPocket.addCard(new Card(hand_cards[1].getText()));
         talon = new Talon();
     }
 
     private void composeTalon3() {   // talon with three cards
         talon = new Talon();
         for(int i = 0; i < 3; i++)
-            talon.addCard(new Card(getSpinnerText(valTalon[i], symTalon[i])));
+            talon.addCard(new Card(talon_cards[i].getText()));
     }
 
     private void composeTalon4() { // talon with four cards
         composeTalon3();
-        talon.addCard(new Card(getSpinnerText(valTalon[3], symTalon[3])));
+        talon.addCard(new Card(talon_cards[3].getText()));
     }
 
     private void composeTalon5() {   // talon with five cards
         composeTalon4();
-        talon.addCard(new Card(getSpinnerText(valTalon[4], symTalon[4])));
+        talon.addCard(new Card(talon_cards[4].getText()));
     }
 
     private void composeCardSets() {

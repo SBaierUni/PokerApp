@@ -7,15 +7,14 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
-// TODO put in main
 public class ImageAdapter extends BaseAdapter {
     private Context context;
     private final int[] symbol_imgs = {R.drawable.clubs_small, R.drawable.diamonds_small, R.drawable.spades_small, R.drawable.hearts_small};
-    private LayoutInflater inflter;
+    private LayoutInflater inflater;
 
     ImageAdapter(Context appContext) {
         this.context = appContext;
-        inflter = (LayoutInflater.from(appContext));
+        inflater = (LayoutInflater.from(appContext));
     }
 
     @Override
@@ -35,7 +34,7 @@ public class ImageAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View convertView, ViewGroup parent) {
-        convertView = inflter.inflate(R.layout.spinner_custom_layout, null);
+        convertView = inflater.inflate(R.layout.spinner_custom_layout, null);
         ImageView icon = (ImageView) convertView.findViewById(R.id.imageView);
         icon.setImageResource(symbol_imgs[i]);
         return convertView;
