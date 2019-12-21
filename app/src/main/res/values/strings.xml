@@ -6,12 +6,30 @@
 
     <string name="wrong_prompt">Wrong Classified Cards</string>
 
-    <string-array name="wrong_classified">
-        <item>    0</item>
-        <item>    1</item>
-        <item>    2</item>
-        <item>    3</item>
-        <item>    4</item>
-        <item>    5</item>
+    <string-array name="hand_symbol_ids">
+        <item>spinner_symbols_hand_1</item>
+        <item>spinner_symbols_hand_2</item>
     </string-array>
+
+    <string-array name="hand_value_ids">
+        <item>spinner_numbers_hand_1</item>
+        <item>spinner_numbers_hand_2</item>
+    </string-array>
+
+    <string-array name="talon_symbol_ids">
+        <item>spinner_symbols_talon_1</item>
+        <item>spinner_symbols_talon_2</item>
+        <item>spinner_symbols_talon_3</item>
+        <item>spinner_symbols_talon_4</item>
+        <item>spinner_symbols_talon_5</item>
+    </string-array>
+
+    <string-array name="talon_value_ids">
+        <item>spinner_numbers_talon_1</item>
+        <item>spinner_numbers_talon_2</item>
+        <item>spinner_numbers_talon_3</item>
+        <item>spinner_numbers_talon_4</item>
+        <item>spinner_numbers_talon_5</item>
+    </string-array>
+
 </resources>

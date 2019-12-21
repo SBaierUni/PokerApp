@@ -10,3 +10,4 @@ We are disciples of Pree and sacrifice our lifes for his pleasure.
 + buttons to one single button with more clear description
 + use spinner for wrong card correction instead of keyboard
 + MLG design
++ delete tensorflow code

@@ -5,16 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ManualEntryActivity">
+    tools:context="com.bene.wintexasholdemfinal.ManualEntryActivity">
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="54dp"
+        android:layout_height="60dp"
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/text4"
+            android:id="@+id/text5"
             android:layout_width="245dp"
             android:layout_height="wrap_content"
             android:text="Pocket Cards:"
@@ -31,51 +31,50 @@
             android:text="Scan Hand" />
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center" >
 
-        <EditText
-            android:id="@+id/pocketCard1Txt"
-            android:layout_width="112dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="C9"
-            android:textAlignment="center" />
-
-        <EditText
-            android:id="@+id/pocketCard2Txt"
-            android:layout_width="111dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="HA"
-            android:textAlignment="center" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/pocketCard1Img"
+        <Spinner
+            android:id="@+id/spinner_numbers_hand_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/c9" />
+            android:background="#00FFFFFF"
+            android:dropDownWidth="50sp"
+            android:spinnerMode="dropdown" />
 
-        <ImageView
-            android:id="@+id/pocketCard2Img"
+        <Spinner
+            android:id="@+id/spinner_symbols_hand_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/ha" />
-    </LinearLayout>
+            android:layout_toEndOf="@+id/spinner_numbers_hand_1"
+            android:layout_marginStart="-10sp"
+            android:background="#00FFFFFF"
+            android:spinnerMode="dropdown" />
+
+
+        <Spinner
+            android:id="@+id/spinner_numbers_hand_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30sp"
+            android:layout_toEndOf="@+id/spinner_symbols_hand_1"
+            android:background="#00FFFFFF"
+            android:dropDownWidth="50sp"
+            android:spinnerMode="dropdown" />
+
+        <Spinner
+            android:id="@+id/spinner_symbols_hand_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/spinner_numbers_hand_2"
+            android:layout_marginStart="-10sp"
+            android:background="#00FFFFFF"
+            android:spinnerMode="dropdown" />
+
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -93,101 +92,114 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center" >
 
-        <EditText
-            android:id="@+id/talonCard1Txt"
+        <Spinner
+            android:id="@+id/spinner_numbers_talon_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="HT"
-            android:textAlignment="center" />
+            android:background="#00FFFFFF"
+            android:dropDownWidth="50sp"
+            android:spinnerMode="dropdown" />
 
-        <EditText
-            android:id="@+id/talonCard2Txt"
+        <Spinner
+            android:id="@+id/spinner_symbols_talon_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="HJ"
-            android:textAlignment="center" />
+            android:layout_toEndOf="@+id/spinner_numbers_talon_1"
+            android:layout_marginStart="-10sp"
+            android:background="#00FFFFFF"
+            android:spinnerMode="dropdown" />
 
-        <EditText
-            android:id="@+id/talonCard3Txt"
+
+        <Spinner
+            android:id="@+id/spinner_numbers_talon_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="HQ"
-            android:textAlignment="center" />
+            android:layout_marginStart="50sp"
+            android:layout_toEndOf="@+id/spinner_symbols_talon_1"
+            android:background="#00FFFFFF"
+            android:dropDownWidth="50sp"
+            android:spinnerMode="dropdown" />
 
-        <EditText
-            android:id="@+id/talonCard4Txt"
+        <Spinner
+            android:id="@+id/spinner_symbols_talon_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="HK"
-            android:textAlignment="center" />
+            android:layout_toEndOf="@+id/spinner_numbers_talon_3"
+            android:layout_marginStart="-10sp"
+            android:background="#00FFFFFF"
+            android:spinnerMode="dropdown" />
 
-        <EditText
-            android:id="@+id/talonCard5Txt"
+        <Spinner
+            android:id="@+id/spinner_numbers_talon_5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="SK"
-            android:textAlignment="center" />
-    </LinearLayout>
+            android:layout_marginStart="50sp"
+            android:layout_toEndOf="@+id/spinner_symbols_talon_3"
+            android:background="#00FFFFFF"
+            android:dropDownWidth="50sp"
+            android:spinnerMode="dropdown" />
 
-    <LinearLayout
+        <Spinner
+            android:id="@+id/spinner_symbols_talon_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/spinner_numbers_talon_5"
+            android:layout_marginStart="-10sp"
+            android:background="#00FFFFFF"
+            android:spinnerMode="dropdown" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center" >
 
-        <ImageView
-            android:id="@+id/talonCard1Img"
+        <Spinner
+            android:id="@+id/spinner_numbers_talon_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/ht" />
+            android:background="#00FFFFFF"
+            android:dropDownWidth="50sp"
+            android:spinnerMode="dropdown" />
 
-        <ImageView
-            android:id="@+id/talonCard2Img"
+        <Spinner
+            android:id="@+id/spinner_symbols_talon_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/hj" />
+            android:layout_toEndOf="@+id/spinner_numbers_talon_2"
+            android:layout_marginStart="-10sp"
+            android:background="#00FFFFFF"
+            android:spinnerMode="dropdown" />
 
-        <ImageView
-            android:id="@+id/talonCard3Img"
+
+        <Spinner
+            android:id="@+id/spinner_numbers_talon_4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/hq" />
+            android:layout_marginStart="50sp"
+            android:layout_toEndOf="@+id/spinner_symbols_talon_2"
+            android:background="#00FFFFFF"
+            android:dropDownWidth="50sp"
+            android:spinnerMode="dropdown" />
 
-        <ImageView
-            android:id="@+id/talonCard4Img"
+        <Spinner
+            android:id="@+id/spinner_symbols_talon_4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/hk" />
+            android:layout_toEndOf="@+id/spinner_numbers_talon_4"
+            android:layout_marginStart="-10sp"
+            android:background="#00FFFFFF"
+            android:spinnerMode="dropdown" />
 
-        <ImageView
-            android:id="@+id/talonCard5Img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/ck" />
-    </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -319,6 +331,7 @@
             android:onClick="onClickhideCards"
             android:text="HideCards" />
 
+
     </LinearLayout>
 
     <Button
@@ -332,4 +345,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Button" />
+
+
 </LinearLayout>
