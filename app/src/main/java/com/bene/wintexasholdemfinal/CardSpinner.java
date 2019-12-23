@@ -7,7 +7,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-// TODO maybe replace T with 10 for better UI
+// TODO maybe replace T with 10 for better UI experience
 public class CardSpinner {
     private Spinner value;
     private Spinner symbol;
@@ -32,11 +32,20 @@ public class CardSpinner {
         return card_symbols[symbol.getSelectedItemPosition()] + "" + value.getSelectedItem().toString();
     }
 
-    void updateTextColor() {
-        if (symbol.getSelectedItemPosition() % 2 == 0)
-            ((TextView) value.getAdapter().getView(0, null, value)).setTextColor(Color.BLACK);
+    // TODO color change on recognition not working
+    public void updateTextColor() {
+        TextView valSpinner;
+
+        // spinner has no elements yet
+        if(value.getChildAt(0) == null)
+            valSpinner = (TextView) value.getAdapter().getView(0, null, value);
         else
-            ((TextView) value.getAdapter().getView(0, null, value)).setTextColor(Color.parseColor("#cb2529"));
+            valSpinner = (TextView) value.getChildAt(0);
+
+        if (symbol.getSelectedItemPosition() % 2 == 0)
+            valSpinner.setTextColor(Color.BLACK);
+        else
+            valSpinner.setTextColor(Color.parseColor("#cb2529"));   // special color red
     }
 
     public int getSelectedValuePosition() {

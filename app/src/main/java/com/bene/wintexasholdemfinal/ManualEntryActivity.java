@@ -52,6 +52,7 @@ public class ManualEntryActivity extends AppCompatActivity
     private int nextRound = 0;
     private int noOfOpponents = 3;
     private ArrayList<String> currPrediction;
+    private boolean roundLock = true;   // only start a new calculation thread at the end of a round
 
     final int ACTIVITY_REQUEST_CODE = 100;
 
@@ -69,24 +70,22 @@ public class ManualEntryActivity extends AppCompatActivity
         scanHand = findViewById(R.id.scanHand);
         scanTurn = findViewById(R.id.scanTurn);
         scanRiver = findViewById(R.id.scanRiver);
-
-        scanFlop.setVisibility(View.INVISIBLE);
-        scanTurn.setVisibility(View.INVISIBLE);
-        scanRiver.setVisibility(View.INVISIBLE);
         hideCards = findViewById(R.id.hideCards);
 
-        String[] categories = getResources().getStringArray(R.array.categories);
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // load predefined strings from string.xml
+        String[] opponentCategories = getResources().getStringArray(R.array.categories);
+        String[] hand_sym_id = getResources().getStringArray(R.array.hand_symbol_ids);
+        String[] hand_val_id = getResources().getStringArray(R.array.hand_value_ids);
+        String[] talon_sym_id = getResources().getStringArray(R.array.talon_symbol_ids);
+        String[] talon_val_id = getResources().getStringArray(R.array.talon_value_ids);
+
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, opponentCategories);
+        //dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         noOfOpponentsSpinner= (Spinner) findViewById(R.id.noOfOpponentsSpinner);
         noOfOpponentsSpinner.setAdapter(dataAdapter);
         noOfOpponentsSpinner.setSelection(noOfOpponents - 1);  // default value: 3 (= index position 2) opponents
         noOfOpponentsSpinner.setOnItemSelectedListener(this);
 
-        String[] hand_sym_id = getResources().getStringArray(R.array.hand_symbol_ids);
-        String[] hand_val_id = getResources().getStringArray(R.array.hand_value_ids);
-        String[] talon_sym_id = getResources().getStringArray(R.array.talon_symbol_ids);
-        String[] talon_val_id = getResources().getStringArray(R.array.talon_value_ids);
 
         for(int i = 0; i < hand_cards.length; i++) {
             hand_cards[i] = new CardSpinner((Spinner) findViewById(getResources().getIdentifier(hand_val_id[i], "id", getPackageName())),
@@ -102,6 +101,7 @@ public class ManualEntryActivity extends AppCompatActivity
             talon_cards[i].setOnItemSelectedListener(this);
         }
 
+        // show a random example game at the beginning
         randomize();
     }
 
@@ -111,30 +111,33 @@ public class ManualEntryActivity extends AppCompatActivity
 
         if (parent_id == noOfOpponentsSpinner.getId()) {
             noOfOpponents = position + 1;
+            // TODO do recalc at the beginning?
             reCalc();
         }
 
+        // TODO 14 times new Process because of cardsetting
         for(int i = 0; i < hand_cards.length; i++)
-            if(hand_cards[i].compareID(parent_id))
+            if (hand_cards[i].compareID(parent_id))
                 checkAndChangeCard(hand_cards[i], cardDescHasChanged(hand_cards[i].getText(), playerPocket, i));
-
 
         for(int i = 0; i < talon_cards.length; i++)
             if(talon_cards[i].compareID(parent_id))
                 checkAndChangeCard(talon_cards[i], cardDescHasChanged(talon_cards[i].getText(), talon, i));
     }
 
-    // TODO check isDuplicateCard correctness
     private void checkAndChangeCard (CardSpinner cs, boolean newCardDesc) { // newCardDesc = true  => cardDesc has changed
         Card otherCard = new Card(cs.getText());
         if (!otherCard.isCorrect() || isDuplicateCard(otherCard, newCardDesc)) {
-            // TODO maybe do some error indication
+            // TODO maybe show some error indicator
             //txt.setTextColor(Color.RED);
+            handValResult.setText("INVALID");
             return;
         }
 
         cs.updateTextColor();
-        composeCardSets();
+
+        if(!roundLock && newCardDesc)
+            composeCardSets();
     }
 
     @Override
@@ -165,58 +168,51 @@ public class ManualEntryActivity extends AppCompatActivity
 
         if(addToTalon) talon.addCard(new Card(card));
 
+        roundLock = true;
         cs.setSelection(card);
+        roundLock = false;
     }
 
+    // TODO no score calculation, until card is manually changed, or round 2 reached
     private void drawRound0() {
         resetGame();
 
-
-        drawCard(hand_cards[0], false);
-        drawCard(hand_cards[1], false);
+        for (CardSpinner hand_card : hand_cards) drawCard(hand_card, false);
 
         enableTxtRound0();
     }
 
     private void enableTxtRound0() {
-        hand_cards[0].setVisibility(View.VISIBLE);
-        hand_cards[1].setVisibility(View.VISIBLE);
+        for (CardSpinner hand_card : hand_cards) hand_card.setVisibility(View.VISIBLE);
 
         if(scanFlop.getVisibility() == View.INVISIBLE)
             scanFlop.setVisibility(View.VISIBLE);
 
-        for (CardSpinner talon_card : talon_cards)
-            talon_card.setVisibility(View.INVISIBLE);
+        composeCardSets();
+        nextRound++;
     }
-    private void enableEditText(EditText txt) {
-        txt.setFocusable(true); txt.setFocusableInTouchMode(true);
-        txt.setClickable(true); txt.setTextColor(Color.BLACK);
-        txt.setEnabled(true);
-    }
-    private void disableEditText(EditText txt) {
-        txt.setFocusable(false); txt.setTextColor(Color.GRAY);
-        txt.setEnabled(false);
-    }
+
     private void drawRound1() {
-        drawCard(talon_cards[0], true);
-        drawCard(talon_cards[1], true);
-        drawCard(talon_cards[2], true);
+        for(int i = 0; i < 3; i++)
+            drawCard(talon_cards[i], true);
 
         enableTxtRound1();
     }
 
     private void enableTxtRound1() {
-        for(int i = 0; i < 3; i++)
-            talon_cards[i].setVisibility(View.VISIBLE);
+        for(int i = 0; i < 3; i++) talon_cards[i].setVisibility(View.VISIBLE);
+        composeCardSets();
+        nextRound++;
     }
     private void drawRound2() {
         drawCard(talon_cards[3], true);
         enableTxtRound2();
-        composeCardSets();
     }
 
     private void enableTxtRound2() {
         talon_cards[3].setVisibility(View.VISIBLE);
+        composeCardSets();
+        nextRound++;
     }
     private void drawRound3() {
         drawCard(talon_cards[4], true);
@@ -224,12 +220,11 @@ public class ManualEntryActivity extends AppCompatActivity
         composeCardSets();
     }
 
+    // TODO pause calculation until cards are drawn
     private void randomize(){
         deck = new Deck();
 
-        drawCard(hand_cards[0], false);
-        drawCard(hand_cards[1], false);
-
+        for (CardSpinner hand_card : hand_cards) drawCard(hand_card, false);
         for (CardSpinner talon_card : talon_cards) drawCard(talon_card, true);
     }
 
@@ -238,20 +233,19 @@ public class ManualEntryActivity extends AppCompatActivity
         nextRound = 0;
         deck = new Deck();
 
+        scanHand.setVisibility(View.VISIBLE);
         scanFlop.setVisibility(View.INVISIBLE);
         scanTurn.setVisibility(View.INVISIBLE);
         scanRiver.setVisibility(View.INVISIBLE);
 
-        hand_cards[0].setVisibility(View.INVISIBLE);
-        hand_cards[1].setVisibility(View.INVISIBLE);
-
-        for (CardSpinner talon_card : talon_cards)
-            talon_card.setVisibility(View.INVISIBLE);
+        for (CardSpinner hand_card : hand_cards) hand_card.setVisibility(View.INVISIBLE);
+        for (CardSpinner talon_card : talon_cards) talon_card.setVisibility(View.INVISIBLE);
 
         talon = new Talon();
         playerPocket = new PlayerPocket();
-        calcAndSetProbability();
-        handValResult.setText("–");
+        reCalc();
+        //calcAndSetProbability();
+        //handValResult.setText("–");
     }
 
     public void onClickStartAgain(View v) {
@@ -291,7 +285,6 @@ public class ManualEntryActivity extends AppCompatActivity
         }
     }
 
-    // TODO make pretty
     private void drawNextRound() {
         switch (nextRound) {
             case 0: drawRound0(); break;
@@ -299,7 +292,6 @@ public class ManualEntryActivity extends AppCompatActivity
             case 2: drawRound2(); break;
             case 3: drawRound3(); break;
         }
-        nextRound++;
     }
 
     private void openCameraView() {
@@ -322,9 +314,8 @@ public class ManualEntryActivity extends AppCompatActivity
         deck.addToAlreadyDrawnCards(talon);
         deck.addToAlreadyDrawnCards(playerPocket);
         String hVal = me.getHighestHandVal().toString();
-        if (nextRound != 0) {
+        if (nextRound != 0)
             handValResult.setText(hVal);
-        }
         calcAndSetProbability();
     }
 
@@ -355,59 +346,31 @@ public class ManualEntryActivity extends AppCompatActivity
         switch (nextRound) {
             case 0:
                 composePlayerPocket();
+                System.out.println("-------> ROUND 0\n");
                 reCalc();
                 handValResult.setText("–");
                 break;
             case 1:
                 composePlayerPocket();
                 composeTalon3();
+                System.out.println("-------> ROUND 1\n");
                 reCalc();
                 break;
             case 2:
                 composePlayerPocket();
                 composeTalon4();
+                System.out.println("-------> ROUND 2\n");
                 reCalc();
                 break;
             case 3:
                 composePlayerPocket();
                 composeTalon5();
+                System.out.println("-------> ROUND 3\n");
                 reCalc();
                 break;
-            case 4:
-                composePlayerPocket();
-                composeTalon5();
-                reCalc();
             default:
-        }
-    }
-
-    private void composeCardSetsOld() {
-        switch (nextRound) {
-            case 0:
-                composePlayerPocket();
-                reCalc();
-                handValResult.setText("–");
-                break;
-            case 1:
-                composePlayerPocket();
-                composeTalon3();
-                reCalc();
-                break;
-            case 2:
-                composePlayerPocket();
-                composeTalon4();
-                reCalc();
-                break;
-            case 3:
-                composePlayerPocket();
-                composeTalon5();
-                reCalc();
-                break;
-            case 4:
-                composePlayerPocket();
-                composeTalon5();
-                reCalc();
-            default:
+                System.out.println("Something unexpected happened -> resetting game");
+                resetGame();
         }
     }
 
@@ -422,13 +385,13 @@ public class ManualEntryActivity extends AppCompatActivity
     }
 
     private void calcAndSetProbability(){
-        if(probCalculatorThread != null){
+        if(probCalculatorThread != null)
             probCalculatorThread.interrupt();
-        }
+
         probCalculatorThread = new Thread(new Runnable() {
             public void run(){
                 final ProbabilityOfWinningCalculator prob = new ProbabilityOfWinningCalculator(talon, playerPocket, deck, noOfOpponents);
-                final DecimalFormat df = new DecimalFormat("#.0");
+                final DecimalFormat df = new DecimalFormat("#0.0");
                 double probs = 0;
                 for(int i = 0; i < 100; i++){
                     if(Thread.currentThread().isInterrupted()){
@@ -445,13 +408,5 @@ public class ManualEntryActivity extends AppCompatActivity
             }
         });
         probCalculatorThread.start();
-    }
-    private Drawable getResId(String cardShort) {  // shorter version to map the card string to the .GIF file representing a card icon
-        cardShort= cardShort.toLowerCase();   // .GIF files need to be in lower case letters => we have to convert; eg "CA" -> "ca"
-        int resourceId = ManualEntryActivity.this.getResources().getIdentifier(
-                cardShort,
-                "drawable",
-                ManualEntryActivity.this.getPackageName());
-        return ContextCompat.getDrawable(this, resourceId);
     }
 }
