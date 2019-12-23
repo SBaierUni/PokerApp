@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.bene.wintexasholdemfinal.ManualEntryActivity"
-    android:background="@drawable/main_theme" >
+    tools:context="com.bene.wintexasholdemfinal.ManualEntryActivity" >
 
 
     <LinearLayout
@@ -19,18 +18,17 @@
             android:layout_width="245dp"
             android:layout_height="wrap_content"
             android:text="Pocket Cards:"
-            android:textColor="#FFFFFF"
             android:textSize="36sp"
             android:textStyle="bold" />
 
         <Button
             android:id="@+id/scanHand"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_theme_border"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="#FFBF00"
             android:onClick="onClickScanHand"
-            android:text="Scan Hand"
-            android:textColor="#FFFFFF" />
+            android:text="Scan Hand" />
     </LinearLayout>
 
     <RelativeLayout
@@ -44,7 +42,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#00FFFFFF"
-            android:popupBackground="@drawable/main_theme"
             android:dropDownWidth="50sp"
             android:spinnerMode="dropdown" />
 
@@ -55,7 +52,6 @@
             android:layout_toEndOf="@+id/spinner_numbers_hand_1"
             android:layout_marginStart="-10sp"
             android:background="#00FFFFFF"
-            android:popupBackground="@drawable/main_theme"
             android:spinnerMode="dropdown" />
 
 
@@ -66,7 +62,6 @@
             android:layout_marginStart="30sp"
             android:layout_toEndOf="@+id/spinner_symbols_hand_1"
             android:background="#00FFFFFF"
-            android:popupBackground="@drawable/main_theme"
             android:dropDownWidth="50sp"
             android:spinnerMode="dropdown" />
 
@@ -77,7 +72,6 @@
             android:layout_toEndOf="@+id/spinner_numbers_hand_2"
             android:layout_marginStart="-10sp"
             android:background="#00FFFFFF"
-            android:popupBackground="@drawable/main_theme"
             android:spinnerMode="dropdown" />
 
     </RelativeLayout>
@@ -93,7 +87,6 @@
             android:layout_width="114dp"
             android:layout_height="wrap_content"
             android:text="Talon:"
-            android:textColor="#FFFFFF"
             android:textSize="36sp"
             android:textStyle="bold" />
 
@@ -110,7 +103,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#00FFFFFF"
-            android:popupBackground="@drawable/main_theme"
             android:dropDownWidth="50sp"
             android:spinnerMode="dropdown" />
 
@@ -121,7 +113,6 @@
             android:layout_toEndOf="@+id/spinner_numbers_talon_1"
             android:layout_marginStart="-10sp"
             android:background="#00FFFFFF"
-            android:popupBackground="@drawable/main_theme"
             android:spinnerMode="dropdown" />
 
 
@@ -132,7 +123,6 @@
             android:layout_marginStart="50sp"
             android:layout_toEndOf="@+id/spinner_symbols_talon_1"
             android:background="#00FFFFFF"
-            android:popupBackground="@drawable/main_theme"
             android:dropDownWidth="50sp"
             android:spinnerMode="dropdown" />
 
@@ -143,7 +133,6 @@
             android:layout_toEndOf="@+id/spinner_numbers_talon_3"
             android:layout_marginStart="-10sp"
             android:background="#00FFFFFF"
-            android:popupBackground="@drawable/main_theme"
             android:spinnerMode="dropdown" />
 
         <Spinner
@@ -153,7 +142,6 @@
             android:layout_marginStart="50sp"
             android:layout_toEndOf="@+id/spinner_symbols_talon_3"
             android:background="#00FFFFFF"
-            android:popupBackground="@drawable/main_theme"
             android:dropDownWidth="50sp"
             android:spinnerMode="dropdown" />
 
@@ -164,7 +152,6 @@
             android:layout_toEndOf="@+id/spinner_numbers_talon_5"
             android:layout_marginStart="-10sp"
             android:background="#00FFFFFF"
-            android:popupBackground="@drawable/main_theme"
             android:spinnerMode="dropdown" />
 
     </RelativeLayout>
@@ -180,7 +167,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#00FFFFFF"
-            android:popupBackground="@drawable/main_theme"
             android:dropDownWidth="50sp"
             android:spinnerMode="dropdown" />
 
@@ -191,7 +177,6 @@
             android:layout_toEndOf="@+id/spinner_numbers_talon_2"
             android:layout_marginStart="-10sp"
             android:background="#00FFFFFF"
-            android:popupBackground="@drawable/main_theme"
             android:spinnerMode="dropdown" />
 
 
@@ -202,7 +187,6 @@
             android:layout_marginStart="50sp"
             android:layout_toEndOf="@+id/spinner_symbols_talon_2"
             android:background="#00FFFFFF"
-            android:popupBackground="@drawable/main_theme"
             android:dropDownWidth="50sp"
             android:spinnerMode="dropdown" />
 
@@ -213,7 +197,6 @@
             android:layout_toEndOf="@+id/spinner_numbers_talon_4"
             android:layout_marginStart="-10sp"
             android:background="#00FFFFFF"
-            android:popupBackground="@drawable/main_theme"
             android:spinnerMode="dropdown" />
 
     </RelativeLayout>
@@ -225,33 +208,31 @@
 
         <Button
             android:id="@+id/scanFlop"
-            android:layout_width="wrap_content"
+            android:layout_width="247dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_theme_border"
+            android:backgroundTint="#FFBF00"
             android:onClick="onClickscanFlop"
             android:text="Scan-Flop"
-            android:textSize="10dp"
-            android:textColor="#FFFFFF" />
+            android:textSize="10dp" />
 
         <Button
             android:id="@+id/scanTurn"
-            android:layout_width="wrap_content"
+            android:layout_width="82dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_theme_border"
+            android:backgroundTint="#FFBF00"
             android:onClick="onClickscanTurn"
             android:text="Scan-Turn"
-            android:textSize="10dp"
-            android:textColor="#FFFFFF" />
+            android:textSize="10dp" />
 
         <Button
             android:id="@+id/scanRiver"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_theme_border"
+            android:layout_weight="1"
+            android:backgroundTint="#FFBF00"
             android:onClick="onClickscanRiver"
-            android:text="Scan-River"
-            android:textSize="10dp"
-            android:textColor="#FFFFFF" />
+            android:text="Scan-River" />
+            android:textSize="10dp" />
 
     </LinearLayout>
 
@@ -265,101 +246,71 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Opponents:"
-            android:textColor="#FFFFFF"
+            android:text="Number of opponents:"
             android:textSize="24sp" />
 
         <Spinner
             android:id="@+id/noOfOpponentsSpinner"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/text3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:popupBackground="@drawable/main_theme" />
+            android:text="Chance of winning:"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/probabilityToWin"
+            android:layout_width="122dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="100.00%"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="61dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/text4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Best hand:"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/handValResult"
+            android:layout_width="256dp"
+            android:layout_height="wrap_content"
+            android:text="Royal Flush"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
     </LinearLayout>
 
     <Button
         android:id="@+id/startAgainButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/button_theme"
+        android:backgroundTint="#52DF16"
         android:onClick="onClickStartAgain"
         android:text="START AGAIN"
-        android:textSize="30sp"
-        android:textColor="#374144"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="24dp"
-        android:orientation="vertical" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:orientation="horizontal" >
-
-        <RelativeLayout
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:layout_marginStart="-50sp">
-
-            <ProgressBar
-                android:id="@+id/circularProgressbar"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="300dp"
-                android:layout_height="150dp"
-                android:gravity="center"
-                android:indeterminate="false"
-                android:max="100"
-                android:progress="90"
-                android:layout_centerInParent="true"
-                android:progressDrawable="@drawable/circular"
-                android:secondaryProgress="100"
-                />
-
-            <TextView
-                android:id="@+id/probabilityToWin"
-                android:layout_width="122dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="0.0%"
-                android:textColor="#FFFFFFFF"
-                android:layout_centerInParent="true"
-                android:textSize="30sp"
-                android:textStyle="bold" />
-
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center"
-            android:layout_marginStart="-70sp" >
-
-            <TextView
-                android:id="@+id/text4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Best hand"
-                android:textColor="#FFFFFF"
-                android:textSize="30sp" />
-
-            <TextView
-                android:id="@+id/handValResult"
-                android:layout_width="256dp"
-                android:layout_height="wrap_content"
-                android:text="Royal Flush"
-                android:textColor="#73DFDF"
-                android:textSize="30sp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-
-    </LinearLayout>
+        android:textSize="30sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -376,11 +327,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/button_theme"
+            android:backgroundTint="#F70A0A"
             android:onClick="onClickhideCards"
-            android:textSize="30sp"
-            android:text="HIDE CARDS"
-            android:textColor="#374144"/>
+            android:text="HideCards" />
 
 
     </LinearLayout>
@@ -396,5 +345,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Button" />
+
 
 </LinearLayout>

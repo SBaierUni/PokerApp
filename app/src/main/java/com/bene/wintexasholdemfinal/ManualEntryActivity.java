@@ -1,15 +1,18 @@
 package com.bene.wintexasholdemfinal;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -38,6 +41,9 @@ public class ManualEntryActivity extends AppCompatActivity
     private Button scanTurn;
     private Button scanRiver;
     private Button hideCards;
+
+    private ProgressBar mProgress;
+    private Handler handler = new Handler();
 
     private Thread probCalculatorThread;
 
@@ -71,6 +77,15 @@ public class ManualEntryActivity extends AppCompatActivity
         scanTurn = findViewById(R.id.scanTurn);
         scanRiver = findViewById(R.id.scanRiver);
         hideCards = findViewById(R.id.hideCards);
+
+        // TODO progress bar
+        Resources res = getResources();
+        Drawable drawable = res.getDrawable(R.drawable.circular);
+        mProgress = (ProgressBar) findViewById(R.id.circularProgressbar);
+        mProgress.setProgress(100);
+        mProgress.setSecondaryProgress(100);
+        mProgress.setMax(100);
+        mProgress.setProgressDrawable(drawable);
 
         // load predefined strings from string.xml
         String[] opponentCategories = getResources().getStringArray(R.array.categories);
@@ -125,6 +140,7 @@ public class ManualEntryActivity extends AppCompatActivity
                 checkAndChangeCard(talon_cards[i], cardDescHasChanged(talon_cards[i].getText(), talon, i));
     }
 
+    // TODO problems with "ghost"-cards
     private void checkAndChangeCard (CardSpinner cs, boolean newCardDesc) { // newCardDesc = true  => cardDesc has changed
         Card otherCard = new Card(cs.getText());
         if (!otherCard.isCorrect() || isDuplicateCard(otherCard, newCardDesc)) {
@@ -277,11 +293,13 @@ public class ManualEntryActivity extends AppCompatActivity
             probabilityToWin.setVisibility(View.INVISIBLE);
             hand_cards[0].setVisibility(View.INVISIBLE);
             hand_cards[1].setVisibility(View.INVISIBLE);
+            handValResult.setVisibility(View.INVISIBLE);
         }
         else {
             probabilityToWin.setVisibility(View.VISIBLE);
             hand_cards[0].setVisibility(View.VISIBLE);
             hand_cards[1].setVisibility(View.VISIBLE);
+            handValResult.setVisibility(View.VISIBLE);
         }
     }
 
@@ -399,8 +417,16 @@ public class ManualEntryActivity extends AppCompatActivity
                     }
                     probs += prob.calcProbability(200);
                     final double transmitProb = probs / (i+1);
-                    probabilityToWin.post(new Runnable(){
+
+                    /*probabilityToWin.post(new Runnable(){
                         public void run(){
+                            probabilityToWin.setText(df.format(transmitProb) +  "%");
+                        }
+                    });*/
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            mProgress.setProgress((int) transmitProb);
                             probabilityToWin.setText(df.format(transmitProb) +  "%");
                         }
                     });

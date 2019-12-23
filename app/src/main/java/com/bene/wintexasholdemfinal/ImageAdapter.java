@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 public class ImageAdapter extends BaseAdapter {
     private Context context;
-    private final int[] symbol_imgs = {R.drawable.clubs_small, R.drawable.diamonds_small, R.drawable.spades_small, R.drawable.hearts_small};
+    private final int[] symbol_imgs = {R.drawable.clubs_dark_theme, R.drawable.diamonds_dark_theme, R.drawable.spades_dark_theme, R.drawable.hearts_dark_theme};
     private LayoutInflater inflater;
 
     ImageAdapter(Context appContext) {

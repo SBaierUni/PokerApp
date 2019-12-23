@@ -43,9 +43,9 @@ public class CardSpinner {
             valSpinner = (TextView) value.getChildAt(0);
 
         if (symbol.getSelectedItemPosition() % 2 == 0)
-            valSpinner.setTextColor(Color.BLACK);
+            valSpinner.setTextColor(Color.parseColor("#36B69B"));   // color cyan
         else
-            valSpinner.setTextColor(Color.parseColor("#cb2529"));   // special color red
+            valSpinner.setTextColor(Color.parseColor("#B83030"));   // color red
     }
 
     public int getSelectedValuePosition() {
