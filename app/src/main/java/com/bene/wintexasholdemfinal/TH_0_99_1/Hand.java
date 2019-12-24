@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Hand extends CardSet implements Comparable<Hand> {
 	private int cardsCalculator[][]= new int[5][14];
-	private HandVal handVal= HandVal.NOTVALID;
+	private HandVal handVal= HandVal.INVALID;
 	protected ArrayList<Integer> tieBreakers;  // Rank values of cards in the hand
 	public Hand() {
 		super("hand", 5);
@@ -12,11 +12,11 @@ public class Hand extends CardSet implements Comparable<Hand> {
 		super(cardsAsString, "hand");
 	}
 	public HandVal getHandVal() {
-		if (handVal != HandVal.NOTVALID) {
+		if (handVal != HandVal.INVALID) {
 			return handVal;
 		}
 		if (currCardIndex != maxNoOfCards - 1) {	// all five cards need to be set ...
-			return HandVal.NOTVALID;	//    otherwise the hand value
+			return HandVal.INVALID;	//    otherwise the hand value
 			//    cannot be calculated
 		}
 		tieBreakers= new ArrayList<Integer>();
@@ -95,7 +95,7 @@ public class Hand extends CardSet implements Comparable<Hand> {
 	private HandVal assessHand() {
 		tieBreakers.clear();
 		if (isStraight() && isFlush() && cardsCalculator[4][12] == 1 && cardsCalculator[4][0] != 1)
-			return HandVal.ROYALFLUSH;
+			return HandVal.RoyalFlush;
 		if (isStraight() && isFlush()){
 			int low = rankValOfColSumLowToHigh(1);
 			int high = rankValOfColSumLowToHigh(1);
@@ -104,21 +104,21 @@ public class Hand extends CardSet implements Comparable<Hand> {
 			} else{
 				tieBreakers.add(high);
 			}
-			return HandVal.STRAIGHTFLUSH;
+			return HandVal.StraightFlush;
 		}
 		if (isPoker()) {
 			addRanksToTiebreaker(4);
 			addRanksToTiebreaker(1);
-			return HandVal.POKER;
+			return HandVal.Poker;
 		}
 		if (isFullHouse()){
 			addRanksToTiebreaker(3);
 			addRanksToTiebreaker(2);
-			return HandVal.FULLHOUSE;
+			return HandVal.FullHouse;
 		}
 		if (isFlush()){
 			addRanksToTiebreaker(1);
-			return HandVal.FLUSH;
+			return HandVal.Flush;
 		}
 		if (isStraight()){
 			int low = rankValOfColSumLowToHigh(1);
@@ -128,28 +128,28 @@ public class Hand extends CardSet implements Comparable<Hand> {
 			} else{
 				tieBreakers.add(high);
 			}
-			return HandVal.STRAIGHT;
+			return HandVal.Straight;
 		}
 		if (isThreeOfAKind()){
 			addRanksToTiebreaker(3);
 			addRanksToTiebreaker(1);
-			return HandVal.THREEOFAKIND;
+			return HandVal.ThreeOfAKind;
 		}
 		if (isTwoPairs()){
 			addRanksToTiebreaker(2);
 			addRanksToTiebreaker(1);
-			return HandVal.TWOPAIRS;
+			return HandVal.TwoPairs;
 		}
 		if (isOnePair()){
 			addRanksToTiebreaker(2);
 			addRanksToTiebreaker(1);
-			return HandVal.ONEPAIR;
+			return HandVal.OnePair;
 		}
 		if (isHighCard()){
 			addRanksToTiebreaker(1);
-			return HandVal.HIGHCARD;
+			return HandVal.HighCard;
 		}
-		return HandVal.NOTVALID;
+		return HandVal.INVALID;
 	}
 	private boolean isStraight() {
 		String sumOfColsStr="";

@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ import androidx.core.content.ContextCompat;
 import com.bene.wintexasholdemfinal.TH_0_99_1.Card;
 import com.bene.wintexasholdemfinal.TH_0_99_1.CardSet;
 import com.bene.wintexasholdemfinal.TH_0_99_1.Deck;
+import com.bene.wintexasholdemfinal.TH_0_99_1.HandVal;
 import com.bene.wintexasholdemfinal.TH_0_99_1.Player;
 import com.bene.wintexasholdemfinal.TH_0_99_1.PlayerPocket;
 import com.bene.wintexasholdemfinal.TH_0_99_1.ProbabilityOfWinningCalculator;
@@ -36,10 +38,8 @@ public class ManualEntryActivity extends AppCompatActivity
     private TextView probabilityToWin= null;
     private TextView handValResult= null;
 
-    private Button scanHand;
-    private Button scanFlop;
-    private Button scanTurn;
-    private Button scanRiver;
+    private ImageButton scanHand;
+    private ImageButton scanFlop;
     private Button hideCards;
 
     private ProgressBar mProgress;
@@ -62,6 +62,8 @@ public class ManualEntryActivity extends AppCompatActivity
 
     final int ACTIVITY_REQUEST_CODE = 100;
 
+    // TODO set spinners to unselected
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,11 +76,8 @@ public class ManualEntryActivity extends AppCompatActivity
         handValResult = (TextView) findViewById(R.id.handValResult);
         scanFlop = findViewById(R.id.scanFlop);
         scanHand = findViewById(R.id.scanHand);
-        scanTurn = findViewById(R.id.scanTurn);
-        scanRiver = findViewById(R.id.scanRiver);
         hideCards = findViewById(R.id.hideCards);
 
-        // TODO progress bar
         Resources res = getResources();
         Drawable drawable = res.getDrawable(R.drawable.circular);
         mProgress = (ProgressBar) findViewById(R.id.circularProgressbar);
@@ -94,7 +93,7 @@ public class ManualEntryActivity extends AppCompatActivity
         String[] talon_sym_id = getResources().getStringArray(R.array.talon_symbol_ids);
         String[] talon_val_id = getResources().getStringArray(R.array.talon_value_ids);
 
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, opponentCategories);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.spinner_custom_numbers_layout, opponentCategories);
         //dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         noOfOpponentsSpinner= (Spinner) findViewById(R.id.noOfOpponentsSpinner);
         noOfOpponentsSpinner.setAdapter(dataAdapter);
@@ -126,11 +125,10 @@ public class ManualEntryActivity extends AppCompatActivity
 
         if (parent_id == noOfOpponentsSpinner.getId()) {
             noOfOpponents = position + 1;
-            // TODO do recalc at the beginning?
+            ((TextView) view).setTextSize(24);
             reCalc();
         }
 
-        // TODO 14 times new Process because of cardsetting
         for(int i = 0; i < hand_cards.length; i++)
             if (hand_cards[i].compareID(parent_id))
                 checkAndChangeCard(hand_cards[i], cardDescHasChanged(hand_cards[i].getText(), playerPocket, i));
@@ -140,7 +138,6 @@ public class ManualEntryActivity extends AppCompatActivity
                 checkAndChangeCard(talon_cards[i], cardDescHasChanged(talon_cards[i].getText(), talon, i));
     }
 
-    // TODO problems with "ghost"-cards
     private void checkAndChangeCard (CardSpinner cs, boolean newCardDesc) { // newCardDesc = true  => cardDesc has changed
         Card otherCard = new Card(cs.getText());
         if (!otherCard.isCorrect() || isDuplicateCard(otherCard, newCardDesc)) {
@@ -244,15 +241,12 @@ public class ManualEntryActivity extends AppCompatActivity
         for (CardSpinner talon_card : talon_cards) drawCard(talon_card, true);
     }
 
-    // TODO reset not fully working, prediction is behind, maybe do recalc
     private void resetGame() {
         nextRound = 0;
         deck = new Deck();
 
         scanHand.setVisibility(View.VISIBLE);
         scanFlop.setVisibility(View.INVISIBLE);
-        scanTurn.setVisibility(View.INVISIBLE);
-        scanRiver.setVisibility(View.INVISIBLE);
 
         for (CardSpinner hand_card : hand_cards) hand_card.setVisibility(View.INVISIBLE);
         for (CardSpinner talon_card : talon_cards) talon_card.setVisibility(View.INVISIBLE);
@@ -260,46 +254,44 @@ public class ManualEntryActivity extends AppCompatActivity
         talon = new Talon();
         playerPocket = new PlayerPocket();
         reCalc();
-        //calcAndSetProbability();
-        //handValResult.setText("–");
     }
 
     public void onClickStartAgain(View v) {
         resetGame();
     }
 
+    // TODO make scan hand and talon always available?
     public void onClickscanFlop(View v){
-        if(scanTurn.getVisibility() == View.INVISIBLE)
-            scanTurn.setVisibility(View.VISIBLE);
-        openCameraView();
-    }
-
-    public void onClickscanTurn(View v){
-        if(scanRiver.getVisibility() == View.INVISIBLE)
-            scanRiver.setVisibility(View.VISIBLE);
-        openCameraView();
-    }
-
-    public void onClickscanRiver(View v){
+        // TODO reset maybe, correct round
         openCameraView();
     }
 
     public void onClickScanHand(View v) {
+        // TODO reset maybe, correct round
         openCameraView();
     }
 
     public void onClickhideCards(View v){
         if(probabilityToWin.getVisibility() == View.VISIBLE){
             probabilityToWin.setVisibility(View.INVISIBLE);
+            mProgress.setVisibility(View.INVISIBLE);
             hand_cards[0].setVisibility(View.INVISIBLE);
             hand_cards[1].setVisibility(View.INVISIBLE);
             handValResult.setVisibility(View.INVISIBLE);
-        }
-        else {
+            hideCards.setBackgroundResource(R.drawable.button_theme_border);
+            hideCards.setText("SHOW CARDS");
+            hideCards.setTextColor(Color.parseColor("#70BFF5"));
+        } else {
             probabilityToWin.setVisibility(View.VISIBLE);
-            hand_cards[0].setVisibility(View.VISIBLE);
-            hand_cards[1].setVisibility(View.VISIBLE);
+            mProgress.setVisibility(View.VISIBLE);
+            if (nextRound > 0) {
+                hand_cards[0].setVisibility(View.VISIBLE);
+                hand_cards[1].setVisibility(View.VISIBLE);
+            }
             handValResult.setVisibility(View.VISIBLE);
+            hideCards.setBackgroundResource(R.drawable.button_theme);
+            hideCards.setText("HIDE CARDS");
+            hideCards.setTextColor(Color.parseColor("#293241"));
         }
     }
 
@@ -406,23 +398,20 @@ public class ManualEntryActivity extends AppCompatActivity
         if(probCalculatorThread != null)
             probCalculatorThread.interrupt();
 
+        System.out.println("-------NEW THREAD------------\n");
+        System.out.println(talon.toString());
+        System.out.println(playerPocket.toString());
+
         probCalculatorThread = new Thread(new Runnable() {
             public void run(){
                 final ProbabilityOfWinningCalculator prob = new ProbabilityOfWinningCalculator(talon, playerPocket, deck, noOfOpponents);
                 final DecimalFormat df = new DecimalFormat("#0.0");
                 double probs = 0;
                 for(int i = 0; i < 100; i++){
-                    if(Thread.currentThread().isInterrupted()){
+                    if(Thread.currentThread().isInterrupted())
                         break;
-                    }
                     probs += prob.calcProbability(200);
                     final double transmitProb = probs / (i+1);
-
-                    /*probabilityToWin.post(new Runnable(){
-                        public void run(){
-                            probabilityToWin.setText(df.format(transmitProb) +  "%");
-                        }
-                    });*/
                     handler.post(new Runnable() {
                         @Override
                         public void run() {

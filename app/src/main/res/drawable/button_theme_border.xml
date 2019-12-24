@@ -13,5 +13,9 @@
         android:topLeftRadius="30dp"/>
 
     <stroke android:width="5px"
+        android:color="#508CD5" />
+    <!--
+
         android:color="#36B689" />
+    -->
 </shape>

@@ -5,5 +5,5 @@
     android:fontFamily="@font/cards_font"
     android:gravity="center"
     android:singleLine="true"
-    android:textColor="#73DFDF"
-    android:textSize="38sp" />
+    android:textColor="#FFFFFF"
+    android:textSize="34dp" />

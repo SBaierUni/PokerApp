@@ -1,15 +1,15 @@
 package com.bene.wintexasholdemfinal.TH_0_99_1;
 
 public enum HandVal {
-	HIGHCARD,
-	ONEPAIR,
-	TWOPAIRS,
-	THREEOFAKIND,
-	STRAIGHT,
-	FLUSH,
-	FULLHOUSE,
-	POKER,
-	STRAIGHTFLUSH,
-	ROYALFLUSH,
-	NOTVALID
+	HighCard,
+	OnePair,
+	TwoPairs,
+	ThreeOfAKind,
+	Straight,
+	Flush,
+	FullHouse,
+	Poker,
+	StraightFlush,
+	RoyalFlush,
+	INVALID
 }

@@ -95,7 +95,7 @@ public class Player {
 		generateHands();
 		if (allHands.size() == 0) {
 			System.out.println("ERROR: NO hands; they have not yet been generated");
-			return HandVal.NOTVALID;
+			return HandVal.INVALID;
 		}
 		Hand highestHand= allHands.get(0);
 		for (Hand h : allHands) {

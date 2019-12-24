@@ -9,9 +9,8 @@
 
 
         <gradient
-            android:centerColor="#27000000"
-            android:endColor="#27000000"
-            android:startColor="#27000000"
+            android:endColor="#25000010"
+            android:startColor="#30000017"
             android:type="sweep" />
     </shape>
 </item>
@@ -36,10 +35,16 @@
                 android:pivotY="50%"
                 android:toDegrees="360" />
 
+            <!--
             <gradient
-                android:centerColor="#31996C"
                 android:endColor="#26B963"
                 android:startColor="#36B6AB"
+                android:type="sweep" />
+
+            -->
+            <gradient
+                android:endColor="#50BAD5"
+                android:startColor="#523E9E"
                 android:type="sweep" />
 
         </shape>

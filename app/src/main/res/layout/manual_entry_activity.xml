@@ -8,294 +8,12 @@
     tools:context="com.bene.wintexasholdemfinal.ManualEntryActivity"
     android:background="@drawable/main_theme" >
 
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/text5"
-            android:layout_width="245dp"
-            android:layout_height="wrap_content"
-            android:text="Pocket Cards:"
-            android:textColor="#FFFFFF"
-            android:textSize="36sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/scanHand"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_theme_border"
-            android:onClick="onClickScanHand"
-            android:text="Scan Hand"
-            android:textColor="#FFFFFF" />
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="155dp"
         android:orientation="horizontal"
-        android:gravity="center" >
 
-        <Spinner
-            android:id="@+id/spinner_numbers_hand_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#00FFFFFF"
-            android:popupBackground="@drawable/main_theme"
-            android:dropDownWidth="50sp"
-            android:spinnerMode="dropdown" />
-
-        <Spinner
-            android:id="@+id/spinner_symbols_hand_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/spinner_numbers_hand_1"
-            android:layout_marginStart="-10sp"
-            android:background="#00FFFFFF"
-            android:popupBackground="@drawable/main_theme"
-            android:spinnerMode="dropdown" />
-
-
-        <Spinner
-            android:id="@+id/spinner_numbers_hand_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30sp"
-            android:layout_toEndOf="@+id/spinner_symbols_hand_1"
-            android:background="#00FFFFFF"
-            android:popupBackground="@drawable/main_theme"
-            android:dropDownWidth="50sp"
-            android:spinnerMode="dropdown" />
-
-        <Spinner
-            android:id="@+id/spinner_symbols_hand_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/spinner_numbers_hand_2"
-            android:layout_marginStart="-10sp"
-            android:background="#00FFFFFF"
-            android:popupBackground="@drawable/main_theme"
-            android:spinnerMode="dropdown" />
-
-    </RelativeLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:baselineAligned="false"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/text1"
-            android:layout_width="114dp"
-            android:layout_height="wrap_content"
-            android:text="Talon:"
-            android:textColor="#FFFFFF"
-            android:textSize="36sp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center" >
-
-        <Spinner
-            android:id="@+id/spinner_numbers_talon_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#00FFFFFF"
-            android:popupBackground="@drawable/main_theme"
-            android:dropDownWidth="50sp"
-            android:spinnerMode="dropdown" />
-
-        <Spinner
-            android:id="@+id/spinner_symbols_talon_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/spinner_numbers_talon_1"
-            android:layout_marginStart="-10sp"
-            android:background="#00FFFFFF"
-            android:popupBackground="@drawable/main_theme"
-            android:spinnerMode="dropdown" />
-
-
-        <Spinner
-            android:id="@+id/spinner_numbers_talon_3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50sp"
-            android:layout_toEndOf="@+id/spinner_symbols_talon_1"
-            android:background="#00FFFFFF"
-            android:popupBackground="@drawable/main_theme"
-            android:dropDownWidth="50sp"
-            android:spinnerMode="dropdown" />
-
-        <Spinner
-            android:id="@+id/spinner_symbols_talon_3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/spinner_numbers_talon_3"
-            android:layout_marginStart="-10sp"
-            android:background="#00FFFFFF"
-            android:popupBackground="@drawable/main_theme"
-            android:spinnerMode="dropdown" />
-
-        <Spinner
-            android:id="@+id/spinner_numbers_talon_5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50sp"
-            android:layout_toEndOf="@+id/spinner_symbols_talon_3"
-            android:background="#00FFFFFF"
-            android:popupBackground="@drawable/main_theme"
-            android:dropDownWidth="50sp"
-            android:spinnerMode="dropdown" />
-
-        <Spinner
-            android:id="@+id/spinner_symbols_talon_5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/spinner_numbers_talon_5"
-            android:layout_marginStart="-10sp"
-            android:background="#00FFFFFF"
-            android:popupBackground="@drawable/main_theme"
-            android:spinnerMode="dropdown" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center" >
-
-        <Spinner
-            android:id="@+id/spinner_numbers_talon_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#00FFFFFF"
-            android:popupBackground="@drawable/main_theme"
-            android:dropDownWidth="50sp"
-            android:spinnerMode="dropdown" />
-
-        <Spinner
-            android:id="@+id/spinner_symbols_talon_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/spinner_numbers_talon_2"
-            android:layout_marginStart="-10sp"
-            android:background="#00FFFFFF"
-            android:popupBackground="@drawable/main_theme"
-            android:spinnerMode="dropdown" />
-
-
-        <Spinner
-            android:id="@+id/spinner_numbers_talon_4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50sp"
-            android:layout_toEndOf="@+id/spinner_symbols_talon_2"
-            android:background="#00FFFFFF"
-            android:popupBackground="@drawable/main_theme"
-            android:dropDownWidth="50sp"
-            android:spinnerMode="dropdown" />
-
-        <Spinner
-            android:id="@+id/spinner_symbols_talon_4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/spinner_numbers_talon_4"
-            android:layout_marginStart="-10sp"
-            android:background="#00FFFFFF"
-            android:popupBackground="@drawable/main_theme"
-            android:spinnerMode="dropdown" />
-
-    </RelativeLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/scanFlop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_theme_border"
-            android:onClick="onClickscanFlop"
-            android:text="Scan-Flop"
-            android:textSize="10dp"
-            android:textColor="#FFFFFF" />
-
-        <Button
-            android:id="@+id/scanTurn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_theme_border"
-            android:onClick="onClickscanTurn"
-            android:text="Scan-Turn"
-            android:textSize="10dp"
-            android:textColor="#FFFFFF" />
-
-        <Button
-            android:id="@+id/scanRiver"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_theme_border"
-            android:onClick="onClickscanRiver"
-            android:text="Scan-River"
-            android:textSize="10dp"
-            android:textColor="#FFFFFF" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="33dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Opponents:"
-            android:textColor="#FFFFFF"
-            android:textSize="24sp" />
-
-        <Spinner
-            android:id="@+id/noOfOpponentsSpinner"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:popupBackground="@drawable/main_theme" />
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/startAgainButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_theme"
-        android:onClick="onClickStartAgain"
-        android:text="START AGAIN"
-        android:textSize="30sp"
-        android:textColor="#374144"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="24dp"
-        android:orientation="vertical" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:orientation="horizontal" >
+        android:background="@drawable/section_border">
 
         <RelativeLayout
             android:layout_width="300dp"
@@ -303,7 +21,7 @@
             android:orientation="horizontal"
             android:gravity="center"
             android:layout_gravity="center"
-            android:layout_marginStart="-50sp">
+            android:layout_marginStart="-60sp">
 
             <ProgressBar
                 android:id="@+id/circularProgressbar"
@@ -352,8 +70,8 @@
                 android:id="@+id/handValResult"
                 android:layout_width="256dp"
                 android:layout_height="wrap_content"
-                android:text="Royal Flush"
-                android:textColor="#73DFDF"
+                android:text="Invalid"
+                android:textColor="#70BFF5"
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
@@ -363,25 +81,325 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="24dp"
-        android:orientation="vertical" />
+        android:layout_height="40dp"
+        android:layout_marginStart="5sp"
+        android:layout_marginEnd="5sp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="5">
+
+        <TextView
+            android:id="@+id/text5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="Pocket Cards"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/scanHand"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:background="@drawable/button_theme_border"
+            android:onClick="onClickScanHand"
+            app:srcCompat="@drawable/camera"
+            android:scaleType="fitCenter" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@drawable/section_border">
+
+        <Spinner
+            android:id="@+id/spinner_numbers_hand_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00FFFFFF"
+            android:popupBackground="@drawable/main_theme"
+            android:dropDownWidth="50sp"
+            android:spinnerMode="dropdown" />
+
+        <Spinner
+            android:id="@+id/spinner_symbols_hand_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/spinner_numbers_hand_1"
+            android:layout_marginStart="-5sp"
+            android:background="#00FFFFFF"
+            android:popupBackground="@drawable/main_theme"
+            android:spinnerMode="dropdown" />
+
+
+        <Spinner
+            android:id="@+id/spinner_numbers_hand_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30sp"
+            android:layout_toEndOf="@+id/spinner_symbols_hand_1"
+            android:background="#00FFFFFF"
+            android:popupBackground="@drawable/main_theme"
+            android:dropDownWidth="50sp"
+            android:spinnerMode="dropdown" />
+
+        <Spinner
+            android:id="@+id/spinner_symbols_hand_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/spinner_numbers_hand_2"
+            android:layout_marginStart="-5sp"
+            android:background="#00FFFFFF"
+            android:popupBackground="@drawable/main_theme"
+            android:spinnerMode="dropdown" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="5sp"
+        android:layout_marginEnd="5sp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="5">
+
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="Talon"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/scanFlop"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:background="@drawable/button_theme_border"
+            android:onClick="onClickscanFlop"
+            app:srcCompat="@drawable/camera"
+            android:scaleType="fitCenter"
+            android:textColor="#FFFFFF" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:baselineAligned="false"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@drawable/section_border">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <Spinner
+                android:id="@+id/spinner_numbers_talon_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00FFFFFF"
+                android:popupBackground="@drawable/main_theme"
+                android:dropDownWidth="50sp"
+                android:spinnerMode="dropdown" />
+
+            <Spinner
+                android:id="@+id/spinner_symbols_talon_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/spinner_numbers_talon_1"
+                android:layout_marginStart="-5sp"
+                android:background="#00FFFFFF"
+                android:popupBackground="@drawable/main_theme"
+                android:spinnerMode="dropdown" />
+
+
+            <Spinner
+                android:id="@+id/spinner_numbers_talon_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50sp"
+                android:layout_toEndOf="@+id/spinner_symbols_talon_1"
+                android:background="#00FFFFFF"
+                android:popupBackground="@drawable/main_theme"
+                android:dropDownWidth="50sp"
+                android:spinnerMode="dropdown" />
+
+            <Spinner
+                android:id="@+id/spinner_symbols_talon_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/spinner_numbers_talon_3"
+                android:layout_marginStart="-5sp"
+                android:background="#00FFFFFF"
+                android:popupBackground="@drawable/main_theme"
+                android:spinnerMode="dropdown" />
+
+            <Spinner
+                android:id="@+id/spinner_numbers_talon_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50sp"
+                android:layout_toEndOf="@+id/spinner_symbols_talon_3"
+                android:background="#00FFFFFF"
+                android:popupBackground="@drawable/main_theme"
+                android:dropDownWidth="50sp"
+                android:spinnerMode="dropdown" />
+
+            <Spinner
+                android:id="@+id/spinner_symbols_talon_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/spinner_numbers_talon_5"
+                android:layout_marginStart="-5sp"
+                android:background="#00FFFFFF"
+                android:popupBackground="@drawable/main_theme"
+                android:spinnerMode="dropdown" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center" >
+
+            <Spinner
+                android:id="@+id/spinner_numbers_talon_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00FFFFFF"
+                android:popupBackground="@drawable/main_theme"
+                android:dropDownWidth="50sp"
+                android:spinnerMode="dropdown" />
+
+            <Spinner
+                android:id="@+id/spinner_symbols_talon_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/spinner_numbers_talon_2"
+                android:layout_marginStart="-5sp"
+                android:background="#00FFFFFF"
+                android:popupBackground="@drawable/main_theme"
+                android:spinnerMode="dropdown" />
+
+
+            <Spinner
+                android:id="@+id/spinner_numbers_talon_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50sp"
+                android:layout_toEndOf="@+id/spinner_symbols_talon_2"
+                android:background="#00FFFFFF"
+                android:popupBackground="@drawable/main_theme"
+                android:dropDownWidth="50sp"
+                android:spinnerMode="dropdown" />
+
+            <Spinner
+                android:id="@+id/spinner_symbols_talon_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/spinner_numbers_talon_4"
+                android:layout_marginStart="-5sp"
+                android:background="#00FFFFFF"
+                android:popupBackground="@drawable/main_theme"
+                android:spinnerMode="dropdown" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="10sp"
+        android:layout_marginEnd="10sp"
+        android:weightSum="5"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="Opponents"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/noOfOpponentsSpinner"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:background="@drawable/button_theme_border"
+            android:popupBackground="@drawable/main_theme"
+            android:spinnerMode="dropdown" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="12dp" >
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginStart="5sp"
+        android:layout_marginEnd="5sp"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+
+        <Button
+            android:id="@+id/startAgainButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/button_theme"
+            android:layout_marginEnd="5sp"
+            android:onClick="onClickStartAgain"
+            android:text="START AGAIN"
+            android:textSize="20sp"
+            android:textColor="#293241"/>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_marginStart="5sp"
+        android:layout_marginEnd="5sp"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
 
         <Button
             android:id="@+id/hideCards"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginStart="5sp"
             android:background="@drawable/button_theme"
             android:onClick="onClickhideCards"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:text="HIDE CARDS"
-            android:textColor="#374144"/>
-
+            android:textColor="#293241"/>
 
     </LinearLayout>
 
