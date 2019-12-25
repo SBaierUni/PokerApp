@@ -5,6 +5,9 @@
     <string name="camera_error">This device doesn\'t support Camera2 API.</string>
 
     <string name="wrong_prompt">Wrong Classified Cards</string>
+    <string name="invalid">INVALID</string>
+    <string name="hide">HIDE CARDS</string>
+    <string name="show">SHOW CARDS</string>
 
     <string-array name="hand_symbol_ids">
         <item>spinner_symbols_hand_1</item>

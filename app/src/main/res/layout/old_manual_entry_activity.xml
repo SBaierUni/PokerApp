@@ -211,7 +211,7 @@
             android:layout_width="247dp"
             android:layout_height="wrap_content"
             android:backgroundTint="#FFBF00"
-            android:onClick="onClickscanFlop"
+            android:onClick="onClickScanTalon"
             android:text="Scan-Flop"
             android:textSize="10dp" />
 
@@ -328,7 +328,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="#F70A0A"
-            android:onClick="onClickhideCards"
+            android:onClick="onClickHideCards"
             android:text="HideCards" />
 
 

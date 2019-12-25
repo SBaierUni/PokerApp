@@ -6,4 +6,4 @@
     android:gravity="center"
     android:singleLine="true"
     android:textColor="#FFFFFF"
-    android:textSize="34dp" />
+    android:textSize="38dp" />

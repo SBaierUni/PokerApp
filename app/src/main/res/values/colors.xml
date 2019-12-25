@@ -5,4 +5,8 @@
     <color name="colorAccent">#425066</color>
 
     <color name="semi_transparent">#61FFFFFF</color>
+    <color name="theme_red">#C43535</color>
+    <color name="theme_blue">#70BFF5</color>
+    <color name="theme_black">#293241</color>
+    <color name="theme_white">#FFFFFF</color>
 </resources>

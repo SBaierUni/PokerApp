@@ -33,7 +33,7 @@
                 android:max="100"
                 android:progress="90"
                 android:layout_centerInParent="true"
-                android:progressDrawable="@drawable/circular"
+                android:progressDrawable="@drawable/circular_progress"
                 android:secondaryProgress="100"
                 />
 
@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="0.0%"
-                android:textColor="#FFFFFFFF"
+                android:textColor="@color/theme_white"
                 android:layout_centerInParent="true"
                 android:textSize="30sp"
                 android:textStyle="bold" />
@@ -60,10 +60,10 @@
             <TextView
                 android:id="@+id/text4"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:text="Best hand"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/theme_white"
                 android:textSize="30sp" />
 
             <TextView
@@ -71,7 +71,7 @@
                 android:layout_width="256dp"
                 android:layout_height="wrap_content"
                 android:text="Invalid"
-                android:textColor="#70BFF5"
+                android:textColor="@color/theme_blue"
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
@@ -86,15 +86,15 @@
         android:layout_marginEnd="5sp"
         android:gravity="center"
         android:orientation="horizontal"
-        android:weightSum="5">
+        android:weightSum="7">
 
         <TextView
             android:id="@+id/text5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="5"
             android:text="Pocket Cards"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/theme_white"
             android:textSize="30sp"
             android:textStyle="bold" />
 
@@ -103,7 +103,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:background="@drawable/button_theme_border"
+            android:background="@android:color/transparent"
             android:onClick="onClickScanHand"
             app:srcCompat="@drawable/camera"
             android:scaleType="fitCenter" />
@@ -167,15 +167,15 @@
         android:layout_marginEnd="5sp"
         android:gravity="center"
         android:orientation="horizontal"
-        android:weightSum="5">
+        android:weightSum="7">
 
         <TextView
             android:id="@+id/text1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="5"
             android:text="Talon"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/theme_white"
             android:textSize="30sp"
             android:textStyle="bold" />
 
@@ -184,8 +184,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:background="@drawable/button_theme_border"
-            android:onClick="onClickscanFlop"
+            android:background="@android:color/transparent"
+            android:onClick="onClickScanTalon"
             app:srcCompat="@drawable/camera"
             android:scaleType="fitCenter"
             android:textColor="#FFFFFF" />
@@ -322,10 +322,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="45dp"
         android:layout_marginStart="10sp"
         android:layout_marginEnd="10sp"
-        android:weightSum="5"
+        android:weightSum="7"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -334,9 +334,9 @@
             android:id="@+id/textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="5"
             android:text="Opponents"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/theme_white"
             android:textSize="30sp"
             android:textStyle="bold" />
 
@@ -345,7 +345,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            android:background="@drawable/button_theme_border"
+            android:background="@android:color/transparent"
             android:popupBackground="@drawable/main_theme"
             android:spinnerMode="dropdown" />
 
@@ -353,38 +353,38 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="12dp" >
+        android:layout_height="10dp" >
 
     </LinearLayout>
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginStart="5sp"
-        android:layout_marginEnd="5sp"
+        android:layout_height="55dp"
+        android:layout_marginStart="15sp"
+        android:layout_marginEnd="15sp"
         android:orientation="horizontal"
         android:weightSum="1">
-
 
         <Button
             android:id="@+id/startAgainButton"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:background="@drawable/button_theme"
             android:layout_marginEnd="5sp"
             android:onClick="onClickStartAgain"
             android:text="START AGAIN"
             android:textSize="20sp"
-            android:textColor="#293241"/>
+            android:textColor="@color/theme_black"/>
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="5sp"
-        android:layout_marginEnd="5sp"
+        android:layout_marginStart="35sp"
+        android:layout_marginEnd="35sp"
         android:orientation="horizontal"
         android:weightSum="1">
 
@@ -392,27 +392,14 @@
         <Button
             android:id="@+id/hideCards"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:layout_marginStart="5sp"
             android:background="@drawable/button_theme"
-            android:onClick="onClickhideCards"
+            android:onClick="onClickHideCards"
             android:textSize="20sp"
-            android:text="HIDE CARDS"
-            android:textColor="#293241"/>
+            android:text="@string/hide"
+            android:textColor="@color/theme_black"/>
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Button" />
-
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Button" />
-
 </LinearLayout>
