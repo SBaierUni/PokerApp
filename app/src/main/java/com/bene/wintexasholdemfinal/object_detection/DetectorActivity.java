@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.bene.wintexasholdemfinal.ManualEntryActivity;
 import com.bene.wintexasholdemfinal.R;
 import com.bene.wintexasholdemfinal.object_detection.env.ImageUtils;
 import com.bene.wintexasholdemfinal.object_detection.tflite.Classifier;
@@ -76,7 +77,7 @@ public class DetectorActivity extends CameraActivity {
                         det_cards.add(result.getTitle());
                 }
 
-                // printing prediction on view
+                // Printing prediction on view
                 runOnUiThread(() -> setPredictionView("Recognized: " + det_cards.toString()));
                 switchBackToCallerActivity(det_cards);
             });
@@ -95,12 +96,10 @@ public class DetectorActivity extends CameraActivity {
 
     private void switchBackToCallerActivity(ArrayList<String> prediction) {
         Intent i = new Intent();
-        // Sending param key as 'website' and value as 'androidhive.info'
+
+        // Send back prediction array to main activity
         i.putStringArrayListExtra("prediction", prediction);
-
-        // Setting resultCode to 100 to identify on old activity
-        setResult(100, i);
-
-        finish();   // terminate activity and switch back to manual_entry_layout
+        setResult(ManualEntryActivity.ACTIVITY_REQUEST_CODE, i);
+        finish();
     }
 }

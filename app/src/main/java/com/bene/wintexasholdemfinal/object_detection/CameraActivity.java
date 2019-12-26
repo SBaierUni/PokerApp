@@ -16,16 +16,12 @@
 
 package com.bene.wintexasholdemfinal.object_detection;
 
-import android.Manifest;
 import android.app.Fragment;
-import android.content.pm.PackageManager;
 import android.hardware.Camera;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Size;
@@ -34,7 +30,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bene.wintexasholdemfinal.R;
 import com.bene.wintexasholdemfinal.object_detection.env.ImageUtils;
@@ -42,9 +37,7 @@ import com.bene.wintexasholdemfinal.object_detection.env.ImageUtils;
 public abstract class CameraActivity extends AppCompatActivity
         implements Camera.PreviewCallback,
         View.OnClickListener {
-    private static final int PERMISSIONS_REQUEST = 1;
 
-    private static final String PERMISSION_CAMERA = Manifest.permission.CAMERA;
     protected int previewWidth = 0;
     protected int previewHeight = 0;
     private Handler handler;
@@ -65,11 +58,7 @@ public abstract class CameraActivity extends AppCompatActivity
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        if (hasPermission()) {
-            setFragment();
-        } else {
-            requestPermission();
-        }
+        setFragment();  // requires camera permission
 
         pred_view = findViewById(R.id.predictionView);
         Button capt_img = findViewById(R.id.captBtn);
@@ -106,47 +95,15 @@ public abstract class CameraActivity extends AppCompatActivity
         imageConverter = () -> ImageUtils.convertYUV420SPToARGB8888(bytes, previewWidth, previewHeight, rgbBytes);
 
         postInferenceCallback = () -> {
-                    camera.addCallbackBuffer(bytes);
-                    isProcessingFrame = false;
-                };
+            camera.addCallbackBuffer(bytes);
+            isProcessingFrame = false;
+        };
         processImage();
     }
 
     protected synchronized void runInBackground(final Runnable r) {
         if (handler != null) {
             handler.post(r);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(
-            final int requestCode, @NonNull final String[] permissions, @NonNull final int[] grantResults) {
-        if (requestCode == PERMISSIONS_REQUEST) {
-            if (grantResults.length > 0
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED
-                    && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-                setFragment();
-            } else {
-                requestPermission();
-            }
-        }
-    }
-
-    private boolean hasPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            return checkSelfPermission(PERMISSION_CAMERA) == PackageManager.PERMISSION_GRANTED;
-        } else {
-            return true;
-        }
-    }
-
-    private void requestPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (shouldShowRequestPermissionRationale(PERMISSION_CAMERA)) {
-                Toast.makeText(CameraActivity.this, "Camera permission is required",
-                        Toast.LENGTH_LONG).show();
-            }
-            requestPermissions(new String[]{PERMISSION_CAMERA}, PERMISSIONS_REQUEST);
         }
     }
 
@@ -177,7 +134,7 @@ public abstract class CameraActivity extends AppCompatActivity
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.captBtn) {
-            // TODO switch back to stats_view instead
+            v.setClickable(false);
             readyForNextImage();
             switchBack = true;
         }
