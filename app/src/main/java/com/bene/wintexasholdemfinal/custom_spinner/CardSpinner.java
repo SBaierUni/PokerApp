@@ -10,13 +10,12 @@ import androidx.core.content.ContextCompat;
 
 import com.bene.wintexasholdemfinal.R;
 
-// TODO maybe replace T with 10 for better UI experience
 public class CardSpinner {
     private Context context;
     private Spinner value;
     private Spinner symbol;
     private final String[] card_values = {"2","3","4","5","6","7","8","9","T","J","Q","K","A"};
-    private final int[] card_symbol_images = {R.drawable.clubs_dark_theme, R.drawable.diamonds_dark_theme, R.drawable.spades_dark_theme, R.drawable.hearts_dark_theme};
+    private final int[] card_symbol_images = {R.drawable.clubs_dark, R.drawable.diamonds_dark, R.drawable.spades_dark, R.drawable.hearts_dark};
     private final char[] card_symbols = {'C','D','S','H'};
 
     public CardSpinner(Context context, Spinner val, Spinner sym) {
@@ -38,6 +37,7 @@ public class CardSpinner {
         return card_symbols[symbol.getSelectedItemPosition()] + "" + value.getSelectedItem().toString();
     }
 
+    /** Adjust the value color to the symbol */
     public void updateTextColor() {
         if (symbol.getSelectedItemPosition() % 2 == 0)
             setTextColor(ContextCompat.getColor(context, R.color.theme_blue));
@@ -57,13 +57,14 @@ public class CardSpinner {
         valSpinner.setTextColor(color);
     }
 
+    /** Callback if CardSpinner object has been selected */
     public void setOnItemSelectedListener(AdapterView.OnItemSelectedListener listener) {
         value.setOnItemSelectedListener(listener);
         symbol.setOnItemSelectedListener(listener);
     }
 
     public void setAdapter(Context context) {
-        value.setAdapter(new ArrayAdapter<String>(context, R.layout.spinner_custom_numbers_layout, card_values));
+        value.setAdapter(new ArrayAdapter<>(context, R.layout.spinner_custom_numbers_layout, card_values));
         symbol.setAdapter(new ImageAdapter(context, card_symbol_images));
     }
 
@@ -76,7 +77,7 @@ public class CardSpinner {
         symbol.setSelection(position);
     }
 
-    /** only valid format e.g. H5 */
+    /** Only valid format e.g. H7 */
     public void setSelection(String card) {
         for(int i = 0; i < card_symbols.length; i++)
             if(card_symbols[i] == card.charAt(0))

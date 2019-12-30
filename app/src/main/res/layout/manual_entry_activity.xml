@@ -6,14 +6,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.bene.wintexasholdemfinal.ManualEntryActivity"
-    android:background="@drawable/main_theme" >
+    android:background="@drawable/background" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="155dp"
         android:orientation="horizontal"
 
-        android:background="@drawable/section_border">
+        android:background="@drawable/section">
 
         <RelativeLayout
             android:layout_width="300dp"
@@ -33,7 +33,7 @@
                 android:max="100"
                 android:progress="90"
                 android:layout_centerInParent="true"
-                android:progressDrawable="@drawable/circular_progress"
+                android:progressDrawable="@drawable/circular_progress_bar"
                 android:secondaryProgress="100"
                 />
 
@@ -115,14 +115,14 @@
         android:layout_height="80dp"
         android:orientation="horizontal"
         android:gravity="center"
-        android:background="@drawable/section_border">
+        android:background="@drawable/section">
 
         <Spinner
             android:id="@+id/spinner_numbers_hand_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#00FFFFFF"
-            android:popupBackground="@drawable/main_theme"
+            android:popupBackground="@drawable/background"
             android:dropDownWidth="50sp"
             android:spinnerMode="dropdown" />
 
@@ -133,7 +133,7 @@
             android:layout_toEndOf="@+id/spinner_numbers_hand_1"
             android:layout_marginStart="-5sp"
             android:background="#00FFFFFF"
-            android:popupBackground="@drawable/main_theme"
+            android:popupBackground="@drawable/background"
             android:spinnerMode="dropdown" />
 
 
@@ -144,7 +144,7 @@
             android:layout_marginStart="30sp"
             android:layout_toEndOf="@+id/spinner_symbols_hand_1"
             android:background="#00FFFFFF"
-            android:popupBackground="@drawable/main_theme"
+            android:popupBackground="@drawable/background"
             android:dropDownWidth="50sp"
             android:spinnerMode="dropdown" />
 
@@ -155,7 +155,7 @@
             android:layout_toEndOf="@+id/spinner_numbers_hand_2"
             android:layout_marginStart="-5sp"
             android:background="#00FFFFFF"
-            android:popupBackground="@drawable/main_theme"
+            android:popupBackground="@drawable/background"
             android:spinnerMode="dropdown" />
 
     </RelativeLayout>
@@ -198,7 +198,7 @@
         android:baselineAligned="false"
         android:orientation="vertical"
         android:gravity="center"
-        android:background="@drawable/section_border">
+        android:background="@drawable/section">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -211,7 +211,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#00FFFFFF"
-                android:popupBackground="@drawable/main_theme"
+                android:popupBackground="@drawable/background"
                 android:dropDownWidth="50sp"
                 android:spinnerMode="dropdown" />
 
@@ -222,7 +222,7 @@
                 android:layout_toEndOf="@+id/spinner_numbers_talon_1"
                 android:layout_marginStart="-5sp"
                 android:background="#00FFFFFF"
-                android:popupBackground="@drawable/main_theme"
+                android:popupBackground="@drawable/background"
                 android:spinnerMode="dropdown" />
 
 
@@ -233,7 +233,7 @@
                 android:layout_marginStart="50sp"
                 android:layout_toEndOf="@+id/spinner_symbols_talon_1"
                 android:background="#00FFFFFF"
-                android:popupBackground="@drawable/main_theme"
+                android:popupBackground="@drawable/background"
                 android:dropDownWidth="50sp"
                 android:spinnerMode="dropdown" />
 
@@ -244,7 +244,7 @@
                 android:layout_toEndOf="@+id/spinner_numbers_talon_3"
                 android:layout_marginStart="-5sp"
                 android:background="#00FFFFFF"
-                android:popupBackground="@drawable/main_theme"
+                android:popupBackground="@drawable/background"
                 android:spinnerMode="dropdown" />
 
             <Spinner
@@ -254,7 +254,7 @@
                 android:layout_marginStart="50sp"
                 android:layout_toEndOf="@+id/spinner_symbols_talon_3"
                 android:background="#00FFFFFF"
-                android:popupBackground="@drawable/main_theme"
+                android:popupBackground="@drawable/background"
                 android:dropDownWidth="50sp"
                 android:spinnerMode="dropdown" />
 
@@ -265,7 +265,7 @@
                 android:layout_toEndOf="@+id/spinner_numbers_talon_5"
                 android:layout_marginStart="-5sp"
                 android:background="#00FFFFFF"
-                android:popupBackground="@drawable/main_theme"
+                android:popupBackground="@drawable/background"
                 android:spinnerMode="dropdown" />
 
         </RelativeLayout>
@@ -281,7 +281,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#00FFFFFF"
-                android:popupBackground="@drawable/main_theme"
+                android:popupBackground="@drawable/background"
                 android:dropDownWidth="50sp"
                 android:spinnerMode="dropdown" />
 
@@ -292,7 +292,7 @@
                 android:layout_toEndOf="@+id/spinner_numbers_talon_2"
                 android:layout_marginStart="-5sp"
                 android:background="#00FFFFFF"
-                android:popupBackground="@drawable/main_theme"
+                android:popupBackground="@drawable/background"
                 android:spinnerMode="dropdown" />
 
 
@@ -303,7 +303,7 @@
                 android:layout_marginStart="50sp"
                 android:layout_toEndOf="@+id/spinner_symbols_talon_2"
                 android:background="#00FFFFFF"
-                android:popupBackground="@drawable/main_theme"
+                android:popupBackground="@drawable/background"
                 android:dropDownWidth="50sp"
                 android:spinnerMode="dropdown" />
 
@@ -314,7 +314,7 @@
                 android:layout_toEndOf="@+id/spinner_numbers_talon_4"
                 android:layout_marginStart="-5sp"
                 android:background="#00FFFFFF"
-                android:popupBackground="@drawable/main_theme"
+                android:popupBackground="@drawable/background"
                 android:spinnerMode="dropdown" />
 
         </RelativeLayout>
@@ -346,7 +346,7 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:background="@android:color/transparent"
-            android:popupBackground="@drawable/main_theme"
+            android:popupBackground="@drawable/background"
             android:spinnerMode="dropdown" />
 
     </LinearLayout>

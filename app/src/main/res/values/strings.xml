@@ -1,10 +1,7 @@
 <resources>
-    <string name="app_name">Card Recognition</string>
-    <string name="description_info">Info</string>
-    <string name="request_permission">This sample needs camera permission.</string>
+    <string name="app_name">Texas Holdem Cheating App</string>
     <string name="camera_error">This device doesn\'t support Camera2 API.</string>
 
-    <string name="wrong_prompt">Wrong Classified Cards</string>
     <string name="invalid">INVALID</string>
     <string name="hide">HIDE CARDS</string>
     <string name="show">SHOW CARDS</string>

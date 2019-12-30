@@ -1,5 +1,6 @@
 package com.bene.wintexasholdemfinal.custom_spinner;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
 import com.bene.wintexasholdemfinal.R;
+
+/**
+ * Custom adapter for adding images as elements in a spinner
+ */
 
 public class ImageAdapter extends BaseAdapter {
     private LayoutInflater inflater;
@@ -33,6 +38,7 @@ public class ImageAdapter extends BaseAdapter {
         return 0;
     }
 
+    @SuppressLint({"ViewHolder", "InflateParams"})
     @Override
     public View getView(int i, View convertView, ViewGroup parent) {
         convertView = inflater.inflate(R.layout.spinner_custom_layout, null);
