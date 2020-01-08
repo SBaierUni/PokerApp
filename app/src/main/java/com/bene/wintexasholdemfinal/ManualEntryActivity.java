@@ -308,11 +308,11 @@ public class ManualEntryActivity extends AppCompatActivity
         deck.addToAlreadyDrawnCards(talon);
         deck.addToAlreadyDrawnCards(playerPocket);
 
-        if (nextRound >= 0) {
+        if (nextRound >= 0)
             handValResult.setText(me.getHighestHandVal().toString());
-            calcAndSetProbability();
-        } else
+        else
             handValResult.setText("-");
+        calcAndSetProbability();
     }
 
     /** Read available hand cards */
