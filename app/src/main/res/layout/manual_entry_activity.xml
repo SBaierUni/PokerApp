@@ -23,7 +23,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="5"
-            android:text="Opponents"
+            android:gravity="right"
+            android:text="# of Opponents"
             android:textColor="@color/theme_white"
             android:textSize="30sp"
             android:textStyle="bold" />

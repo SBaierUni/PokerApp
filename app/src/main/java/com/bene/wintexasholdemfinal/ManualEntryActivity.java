@@ -54,6 +54,8 @@ public class ManualEntryActivity extends AppCompatActivity
     private ImageButton scanHand;
     private ImageButton scanFlop;
 
+    private TextView bestHand;
+
     private ProgressBar mProgress;
     private Handler handler = new Handler();
 
@@ -81,6 +83,7 @@ public class ManualEntryActivity extends AppCompatActivity
         scanFlop = findViewById(R.id.scanFlop);
         scanHand = findViewById(R.id.scanHand);
         hideCards = findViewById(R.id.hideCards);
+        bestHand = findViewById(R.id.text4);
 
         Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.circular_progress_bar, null);
         mProgress = findViewById(R.id.circularProgressbar);
@@ -289,6 +292,7 @@ public class ManualEntryActivity extends AppCompatActivity
             hideCards.setBackgroundResource(R.drawable.button_theme);
             hideCards.setText(R.string.hide);
             hideCards.setTextColor(ContextCompat.getColor(this, R.color.theme_black));
+            bestHand.setVisibility(View.VISIBLE);
         } else {
             probabilityToWin.setVisibility(View.INVISIBLE);
             mProgress.setVisibility(View.INVISIBLE);
@@ -298,6 +302,7 @@ public class ManualEntryActivity extends AppCompatActivity
             hideCards.setBackgroundResource(R.drawable.button_theme_inverse);
             hideCards.setText(R.string.show);
             hideCards.setTextColor(ContextCompat.getColor(this, R.color.theme_blue));
+            bestHand.setVisibility(View.INVISIBLE);
         }
     }
 
