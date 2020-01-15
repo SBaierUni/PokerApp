@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">Texas Holdem Cheating App</string>
+    <string name="app_name">Poker Calculator</string>
     <string name="camera_error">This device doesn\'t support Camera2 API.</string>
 
     <string name="invalid">INVALID</string>
-    <string name="hide">HIDE CARDS</string>
-    <string name="show">SHOW CARDS</string>
+    <string name="hide">HIDE ALL ABOVE</string>
+    <string name="show">SHOW ALL ABOVE</string>
 
     <string-array name="hand_symbol_ids">
         <item>spinner_symbols_hand_1</item>
@@ -42,5 +42,7 @@
         <item>7</item>
         <item>8</item>
     </string-array>
+
+    <string name="help_text">Click the fucking buttons u fucking moron. I kill ur fish u stupid retard.</string>
 
 </resources>

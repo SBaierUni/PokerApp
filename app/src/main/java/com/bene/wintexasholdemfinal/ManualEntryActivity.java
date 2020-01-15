@@ -1,6 +1,7 @@
 package com.bene.wintexasholdemfinal;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -161,6 +162,14 @@ public class ManualEntryActivity extends AppCompatActivity
             startActivityForResult(i, ACTIVITY_REQUEST_CODE);
         } else
             requestPermission();
+    }
+
+    public void onHelpClick(View v) {
+        new AlertDialog.Builder(this)
+                .setTitle("Info")
+                .setMessage(R.string.help_text)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 
     public void onClickScanHand(View v) {
