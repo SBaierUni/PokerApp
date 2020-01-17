@@ -9,79 +9,104 @@
     android:background="@drawable/background" >
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:weightSum="8"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_width="wrap_content"
+        android:layout_height="105dp"
+        android:orientation="vertical"
+        android:background="#18FFFFFF" >
 
-        <TextView
-            android:id="@+id/titleView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:textColor="@color/theme_white"
-            android:textSize="40dp"
-            android:layout_weight="7"
-            android:textStyle="bold" />
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@mipmap/main_logo_round" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="10dp"
+            android:weightSum="8"
+            android:gravity="center"
+            android:orientation="horizontal">
 
+            <TextView
+                android:id="@+id/titleView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textColor="@color/theme_white"
+                android:textSize="34dp"
+                android:layout_weight="7"/>
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_marginTop="2dp"
+                android:layout_width="0dp"
+                android:layout_height="34dp"
+                android:layout_weight="1"
+                app:srcCompat="@mipmap/main_logo_round" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="-5dp"
+            android:weightSum="7"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                app:srcCompat="@drawable/help_logo"
+                android:scaleType="fitCenter"
+                android:onClick="onHelpClick" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:gravity="right"
+                android:text="# of Opponents"
+                android:textAlignment="textEnd"
+                android:textColor="@color/theme_white"
+                android:textSize="28dp"
+                android:textStyle="bold"
+                tools:ignore="RtlCompat" />
+
+            <Spinner
+                android:id="@+id/noOfOpponentsSpinner"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:popupBackground="@drawable/background"
+                android:spinnerMode="dropdown" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:weightSum="8"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            app:srcCompat="@drawable/help_logo"
-            android:scaleType="fitCenter"
-            android:onClick="onHelpClick" />
-
-        <LinearLayout
-            android:layout_width="40dp"
-            android:layout_height="match_parent" >
-        </LinearLayout>
+        android:layout_height="40dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:gravity="left"
+        android:orientation="horizontal"
+        android:weightSum="5">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/chanceToWin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:gravity="right"
-            android:text="# of Opponents"
-            android:textAlignment="textEnd"
+            android:layout_weight="4"
+            android:text="Chance to win"
             android:textColor="@color/theme_white"
-            android:textSize="30dp"
+            android:textSize="28dp"
             android:textStyle="bold" />
-
-        <Spinner
-            android:id="@+id/noOfOpponentsSpinner"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:background="@android:color/transparent"
-            android:popupBackground="@drawable/background"
-            android:spinnerMode="dropdown" />
 
     </LinearLayout>
 
@@ -144,9 +169,9 @@
 
             <TextView
                 android:id="@+id/handValResult"
-                android:layout_width="256dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Invalid"
+                android:text="-"
                 android:textColor="@color/theme_blue"
                 android:textSize="30dp"
                 android:textStyle="bold" />
@@ -159,6 +184,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
         android:gravity="center"
         android:orientation="horizontal"
         android:weightSum="5">
@@ -170,7 +196,7 @@
             android:layout_weight="4"
             android:text="Pocket Cards"
             android:textColor="@color/theme_white"
-            android:textSize="30dp"
+            android:textSize="28dp"
             android:textStyle="bold" />
 
         <ImageButton
@@ -241,7 +267,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
-        android:layout_marginBottom="35dp"
         android:orientation="horizontal"
         android:weightSum="1">
 
@@ -264,6 +289,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginStart="15dp"
+        android:layout_marginTop="35dp"
         android:gravity="center"
         android:orientation="horizontal"
         android:weightSum="5">
@@ -273,9 +299,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="4"
-            android:text="Talon"
+            android:text="Talon Cards"
             android:textColor="@color/theme_white"
-            android:textSize="30dp"
+            android:textSize="28dp"
             android:textStyle="bold" />
 
         <ImageButton
@@ -347,38 +373,11 @@
                 android:spinnerMode="dropdown" />
 
             <Spinner
-                android:id="@+id/spinner_numbers_talon_5"
+                android:id="@+id/spinner_numbers_talon_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
                 android:layout_toEndOf="@+id/spinner_symbols_talon_3"
-                android:background="#00FFFFFF"
-                android:popupBackground="@drawable/background"
-                android:dropDownWidth="50dp"
-                android:spinnerMode="dropdown" />
-
-            <Spinner
-                android:id="@+id/spinner_symbols_talon_5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/spinner_numbers_talon_5"
-                android:layout_marginStart="-5dp"
-                android:background="#00FFFFFF"
-                android:popupBackground="@drawable/background"
-                android:spinnerMode="dropdown" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center" >
-
-            <Spinner
-                android:id="@+id/spinner_numbers_talon_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:background="#00FFFFFF"
                 android:popupBackground="@drawable/background"
                 android:dropDownWidth="50dp"
@@ -394,13 +393,18 @@
                 android:popupBackground="@drawable/background"
                 android:spinnerMode="dropdown" />
 
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center" >
 
             <Spinner
                 android:id="@+id/spinner_numbers_talon_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
-                android:layout_toEndOf="@+id/spinner_symbols_talon_2"
                 android:background="#00FFFFFF"
                 android:popupBackground="@drawable/background"
                 android:dropDownWidth="50dp"
@@ -411,6 +415,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/spinner_numbers_talon_4"
+                android:layout_marginStart="-5dp"
+                android:background="#00FFFFFF"
+                android:popupBackground="@drawable/background"
+                android:spinnerMode="dropdown" />
+
+
+            <Spinner
+                android:id="@+id/spinner_numbers_talon_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_toEndOf="@+id/spinner_symbols_talon_4"
+                android:background="#00FFFFFF"
+                android:popupBackground="@drawable/background"
+                android:dropDownWidth="50dp"
+                android:spinnerMode="dropdown" />
+
+            <Spinner
+                android:id="@+id/spinner_symbols_talon_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/spinner_numbers_talon_5"
                 android:layout_marginStart="-5dp"
                 android:background="#00FFFFFF"
                 android:popupBackground="@drawable/background"
