@@ -44,15 +44,17 @@
     </string-array>
 
     <string name="help_text">
-        1. Take a picture of your hand by pressing the camera symbol and tapping on the screen when both cards are in focus.\n
-        2. Take a picture of the first three cards on the table.\n
-        3. Do the same with the 4th and the 5th card.\n
-        If a card isn\'t recognized correctly, you can tap on the rank or the suit of the card to change it.\n
-        By pressing \"Hide all above\" you hide your chance of winning and the cards in your hand.\n
-        After a game ends, you can press \"Start from scratch\" to start a new game.\n
-        In the top right corner you can select the amount of opponents by pressing the number.\n
-        If a card is not recognized at all, the app chooses a random card.\n
-        You can\'t choose a card twice.
+        Usage:\n\n
+        1. Select your number of opponents by pressing the number in the top right corner\n\n
+        2. Take a picture of your hand by pressing the camera symbol next to \"Pocket Cards\" and tapping on the screen when both cards are in focus.\n\n
+        3. Take a picture of the first three cards on the table using the camera symbol next to \"Talon Cards\".\n\n
+        4. Do the same with the 4th and the 5th card.\n\n\n
+        Pro Tips:\n\n
+        - If a card isn\'t recognized correctly, you can tap on the rank or the suit of the card to change it.\n\n
+        - By pressing \"Hide all above\" you hide your chance of winning and the cards in your hand.\n\n
+        - After a game ends, you can press \"Start from scratch\" to start a new game.\n\n
+        - You can\'t choose a card twice\n\n
+        - The best hand only gets calculated after you entered your pocket cards and the first 3 talon cards
     </string>
 
 </resources>
