@@ -5,11 +5,14 @@ import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.graphics.RectF;
 import android.util.Size;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.bene.wintexasholdemfinal.ManualEntryActivity;
 import com.bene.wintexasholdemfinal.R;
@@ -71,15 +74,30 @@ public class DetectorActivity extends CameraActivity {
                 runOnUiThread(() -> setPredictionView("Performing recognition..."));
 
                 final List<Classifier.Recognition> results = detector.recognizeImage(croppedBitmap);
-                final ArrayList<String> det_cards = new ArrayList<>();
+                Map<String, Float> tr = new HashMap<>();
                 for (final Classifier.Recognition result : results) {
-                    if (result.getConfidence() >= MINIMUM_CONFIDENCE && !det_cards.contains(result.getTitle()))
-                        det_cards.add(result.getTitle());
+                    if (result.getConfidence() >= MINIMUM_CONFIDENCE) {
+                        float tmpLoc = result.getLocation().centerX() + result.getLocation().centerY()/2;
+                        if(tr.containsKey(result.getTitle())) {
+                            if(tmpLoc < tr.get(result.getTitle()))
+                                tr.replace(result.getTitle(), tmpLoc);
+                        } else
+                            tr.put(result.getTitle(), tmpLoc);
+                    }
                 }
 
-                // Printing prediction on view
-                runOnUiThread(() -> setPredictionView("Recognized: " + det_cards.toString()));
-                switchBackToCallerActivity(det_cards);
+                // sorting after location
+                List<Map.Entry<String, Float>> list = new ArrayList<>(tr.entrySet());
+                list.sort(Map.Entry.comparingByValue());
+
+                // add to string list
+                final ArrayList<String> det_card = new ArrayList<>();
+                for (Map.Entry<String, Float> e : list)
+                    det_card.add(e.getKey());
+
+                // printing prediction on view
+                runOnUiThread(() -> setPredictionView("Recognized: " + det_card.toString()));
+                switchBackToCallerActivity(det_card);
             });
         }
     }

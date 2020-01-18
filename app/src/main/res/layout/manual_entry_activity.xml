@@ -352,7 +352,7 @@
 
 
             <Spinner
-                android:id="@+id/spinner_numbers_talon_3"
+                android:id="@+id/spinner_numbers_talon_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
@@ -363,31 +363,31 @@
                 android:spinnerMode="dropdown" />
 
             <Spinner
-                android:id="@+id/spinner_symbols_talon_3"
+                android:id="@+id/spinner_symbols_talon_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/spinner_numbers_talon_3"
+                android:layout_toEndOf="@+id/spinner_numbers_talon_2"
                 android:layout_marginStart="-5dp"
                 android:background="#00FFFFFF"
                 android:popupBackground="@drawable/background"
                 android:spinnerMode="dropdown" />
 
             <Spinner
-                android:id="@+id/spinner_numbers_talon_2"
+                android:id="@+id/spinner_numbers_talon_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
-                android:layout_toEndOf="@+id/spinner_symbols_talon_3"
+                android:layout_toEndOf="@+id/spinner_symbols_talon_2"
                 android:background="#00FFFFFF"
                 android:popupBackground="@drawable/background"
                 android:dropDownWidth="50dp"
                 android:spinnerMode="dropdown" />
 
             <Spinner
-                android:id="@+id/spinner_symbols_talon_2"
+                android:id="@+id/spinner_symbols_talon_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/spinner_numbers_talon_2"
+                android:layout_toEndOf="@+id/spinner_numbers_talon_3"
                 android:layout_marginStart="-5dp"
                 android:background="#00FFFFFF"
                 android:popupBackground="@drawable/background"
