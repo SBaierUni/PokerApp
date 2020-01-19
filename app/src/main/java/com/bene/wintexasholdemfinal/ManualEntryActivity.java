@@ -300,7 +300,11 @@ public class ManualEntryActivity extends AppCompatActivity
         deck.addToAlreadyDrawnCards(playerPocket);
 
         if (atLeastOneValid) {
-            handValResult.setText(me.getHighestHandVal().toString());
+            if (playerPocket.getCards().size() + talon.getCards().size() >= 5) {
+                handValResult.setText(me.getHighestHandVal().toString());
+            } else {
+                handValResult.setText("-");
+            }
             calcAndSetProbability();
         }
     }
