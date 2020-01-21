@@ -64,6 +64,8 @@ public class ManualEntryActivity extends AppCompatActivity
     private Talon talon = new Talon();
     private PlayerPocket playerPocket = new PlayerPocket();
 
+    private int hiddenCnt = 0;
+
     private boolean predictHandCards;           // true if pred. hand, false if pred. talon
     private boolean atLeastOneValid = false;    // at least one valid card available
 
@@ -159,6 +161,13 @@ public class ManualEntryActivity extends AppCompatActivity
             requestPermission();
     }
 
+    public void easterEgg(View v) {
+        if(hiddenCnt > 7) {
+            setContentView(R.layout.manual_entry_activity_light);
+        } else
+            hiddenCnt++;
+    }
+
     public void onClickScanHand(View v) {
         predictHandCards = true;
         openCameraView();
@@ -196,9 +205,8 @@ public class ManualEntryActivity extends AppCompatActivity
         for (CardSpinner talon_card : talon_cards) talon_card.reset();
 
         stopStatisticThread();
-        probabilityToWin.setText("");
+        resetStatistics();
         handValResult.setText("-");
-        mProgress.setProgress(0);
     }
 
     /** Update card value or signal error */
@@ -321,13 +329,15 @@ public class ManualEntryActivity extends AppCompatActivity
             for (int i = 0; i < 100; i++) {
                 if (Thread.currentThread().isInterrupted())
                     break;
-                probs += prob.calcProbability(200);
+                probs += prob.calcProbability(50);
                 final double transmitProb = probs / (i + 1);
                 handler.post(() -> {
-                    if(default_round) {
-                        mProgress.setProgress(0);
-                        probabilityToWin.setText("");
+                    if (default_round) {
+                        resetStatistics();
                         default_round = false;
+                    } else if (duplicateCards()) {
+                        handValResult.setText("DUPLICATE");
+                        resetStatistics();
                     } else {
                         mProgress.setProgress((int) transmitProb);
                         probabilityToWin.setText(df.format(transmitProb) + "%");
@@ -338,8 +348,18 @@ public class ManualEntryActivity extends AppCompatActivity
         probCalculatorThread.start();
     }
 
+    private boolean duplicateCards() {
+        ArrayList<Integer> alreadyDrawn = deck.getAlreadyDrawnIndices();
+
+        for (int i = 0; i < alreadyDrawn.size()-1; i++)
+            for ( int j = i+1; j < alreadyDrawn.size(); j++)
+                if (alreadyDrawn.get(i) == (int)alreadyDrawn.get(j))
+                    return true;
+        return false;
+    }
+
     private void stopStatisticThread() {
-        if(probCalculatorThread != null) {
+        if (probCalculatorThread != null) {
             probCalculatorThread.interrupt();
             try {
                 probCalculatorThread.join();
@@ -348,6 +368,11 @@ public class ManualEntryActivity extends AppCompatActivity
             }
             probCalculatorThread = null;
         }
+    }
+
+    private void resetStatistics() {
+        probabilityToWin.setText("");
+        mProgress.setProgress(0);
     }
 
     /** Convert String id to resource id*/
