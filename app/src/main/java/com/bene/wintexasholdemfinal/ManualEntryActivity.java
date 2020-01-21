@@ -198,6 +198,7 @@ public class ManualEntryActivity extends AppCompatActivity
         stopStatisticThread();
         probabilityToWin.setText("");
         handValResult.setText("-");
+        mProgress.setProgress(0);
     }
 
     /** Update card value or signal error */
@@ -340,7 +341,11 @@ public class ManualEntryActivity extends AppCompatActivity
     private void stopStatisticThread() {
         if(probCalculatorThread != null) {
             probCalculatorThread.interrupt();
-            while (!probCalculatorThread.isAlive());
+            try {
+                probCalculatorThread.join();
+            } catch (InterruptedException e) {
+                // do nothing
+            }
             probCalculatorThread = null;
         }
     }
