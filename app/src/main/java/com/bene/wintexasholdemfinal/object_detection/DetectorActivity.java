@@ -27,7 +27,7 @@ public class DetectorActivity extends CameraActivity {
     private static final String LABELS_FILE = "file:///android_asset/labels.txt";
     // Minimum detection confidence to track a detection.
     private static final float MINIMUM_CONFIDENCE = 0.5f;
-    private static final Size DESIRED_PREVIEW_SIZE = new Size(640, 480);
+    private static final Size DESIRED_PREVIEW_SIZE = new Size(1920, 1080);
 
     private Classifier detector;
     private Bitmap rgbFrameBitmap = null;
