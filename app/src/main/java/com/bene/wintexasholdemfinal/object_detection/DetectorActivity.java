@@ -26,7 +26,7 @@ public class DetectorActivity extends CameraActivity {
     private static final String MODEL_FILE = "cards.tflite";
     private static final String LABELS_FILE = "file:///android_asset/labels.txt";
     // Minimum detection confidence to track a detection.
-    private static final float MINIMUM_CONFIDENCE = 0.5f;
+    private static final float MINIMUM_CONFIDENCE = 0.4f;
     private static final Size DESIRED_PREVIEW_SIZE = new Size(1920, 1080);
 
     private Classifier detector;
@@ -76,7 +76,7 @@ public class DetectorActivity extends CameraActivity {
                 Map<String, Float> tr = new HashMap<>();
                 for (final Classifier.Recognition result : results) {
                     if (result.getConfidence() >= MINIMUM_CONFIDENCE) {
-                        float tmpLoc = result.getLocation().centerX() + result.getLocation().centerY()/2;
+                        float tmpLoc = result.getLocation().centerX() + result.getLocation().centerY();
                         if(tr.containsKey(result.getTitle())) {
                             if(tmpLoc < tr.get(result.getTitle()))
                                 tr.replace(result.getTitle(), tmpLoc);

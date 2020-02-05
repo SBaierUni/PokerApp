@@ -2,12 +2,14 @@ package com.bene.wintexasholdemfinal;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -188,9 +190,10 @@ public class ManualEntryActivity extends AppCompatActivity
 
     public void onHelpClick(View v) {
         new AlertDialog.Builder(this)
-                .setTitle("Info")
+                .setTitle("INFO")
                 .setMessage(R.string.help_text)
                 .setIcon(R.drawable.help)
+                .setPositiveButton("close", (arg0, arg1) -> arg0.dismiss())
                 .show();
     }
 
@@ -210,7 +213,6 @@ public class ManualEntryActivity extends AppCompatActivity
     }
 
     /** Update card value or signal error */
-    // TODO no double card detection, threading problem
     private void checkAndChangeCard(CardSpinner cs) {
         Card otherCard = new Card(cs.getText());
 
