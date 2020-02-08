@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Poker Calculator</string>
+    <string name="app_name">Winning Poker Calculator</string>
     <string name="camera_error">This device doesn\'t support Camera2 API.</string>
 
     <string name="invalid">INVALID</string>
@@ -44,6 +44,51 @@
     </string-array>
 
     <string name="help_text">
+        The WinPoker app calculates the chance to win Texas Hold\'em. You only need to enter YOUR two
+        private cards, not those of your opponents that you usually do not know. Then you enter
+        incrementally the 3 + 1 +1, that is, 5 public face-up cards. The app internally plays
+        hundreds of games every time more information is available (first your two private cards,
+        then the public cards which we call Talon: 3 cards, then one card, the so-called \'turn\',
+        and finally a last one, the so-called \'river\'), by randomly drawing cards also for your
+        fictive opponents and counting the games in which you would have won. This approximates
+        extremely well the actual chance you have to win.
+        \n\n
+        Using the WinPoker app is as simple as dealing cards:
+        \n\n
+        1. Select your number of opponents by pressing the number in the top right corner. You can
+        change the number of opponents at any time.
+        \n\n
+        2. Enter YOUR two private cards in the section Player Pocket. Just take a picture of the two
+        cards by clicking on the camera symbol right to the text Pocket Cards. It does not matter
+        whether you take pictures in landscape or portrait orientation. Just make sure that the
+        cards are in the picture. The WinPoker app\'s image recognition usually reads your cards
+        correctly. If not, you can correct each card by clicking on its rank or suit. A pop-up menu
+        allows you to modify rank and suit. As an alternative to taking a picture, you could also
+        enter the suit and rank of each card manually by clicking on the particular hyphen \'–\'
+        \n\n
+        3. Enter the three face-up cards that are visible to everyone (the \'flop\') in the section
+        Talon Cards, again either by taking a picture (by clicking on the camera symbol right to the
+        text Talon Cards) or entering them manually. Note that you can hide your private cards
+        (Pocket Cards) as well as your chance of winning and best hand by pressing the HIDE ALL
+        ABOVE button. This is important if you take a picture, because your opponents might see your
+        private information then. When only you view the display, the SHOW ALL ABOVE button shows
+        your private information again. Note that the \'Best hand\' is only shown after you entered
+        your pocket cards and the first 3 talon cards, because only then a hand consisting of 5
+        cards can be formed.
+        \n\n
+        4. Enter the next face-up card (the \'turn\', the fourth card in the Talon Pocket), again
+        either by taking another picture (typically only of this one card) or entering the card
+        manually.
+        \n\n
+        5. Enter the final face-up card (the \'river\', the fifth card in the Talon Pocket), again
+        either by taking another picture (typically only of this one card) or entering the card
+        manually.
+        \n\n
+        6. By pressing START FROM SCRATCH you play another round (point 2 above).
+
+    </string>
+
+    <string name="help_text_old">
         Usage:\n\n
         1. Select your number of opponents by pressing the number in the top right corner\n\n
         2. Take a picture of your hand by pressing the camera symbol next to \"Pocket Cards\" and tapping on the screen when both cards are in focus.\n\n
